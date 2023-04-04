@@ -6,16 +6,18 @@
       <i class="fi fi-rr-leaf text-xs ml-0.5 text-green-800"></i>
     </h1>
     <ul class="m-2" v-for="(item, index) in navigation" :key="index">
-      <li
-        class="px-2.5 py-2 inline-block cursor-pointer rounded-lg delay-75 duration-150 linear"
-        :class="
-          item.active
-            ? 'bg-green-900/10 text-green-900  '
-            : 'text-green-900/60 hover:bg-green-900/10 '
-        "
-      >
-        <i class="fi" :class="item.icon"></i>
-      </li>
+      <router-link :to="item.url">
+        <li
+          class="px-2.5 py-2 inline-block cursor-pointer rounded-lg delay-75 duration-150 linear"
+          :class="
+            item.active
+              ? 'bg-green-900/10 text-green-900  '
+              : 'text-green-900/60 hover:bg-green-900/10 '
+          "
+        >
+          <i class="fi" :class="item.icon"></i>
+        </li>
+      </router-link>
     </ul>
     <i
       class="fi fi-rr-sign-out-alt px-2 py-2 rounded-xl mt-16 text-green-900"
@@ -25,9 +27,24 @@
 <script setup>
 import { ref } from "vue";
 const navigation = ref([
-  { name: "Dashboard", icon: "fi-sr-home", url: "", active: true },
-  { name: "Wish", icon: "fi-sr-heart", url: "", active: false },
-  { name: "Checkout", icon: "fi-sr-sack-dollar", url: "", active: false },
+  {
+    name: "Dashboard",
+    icon: "fi-sr-home",
+    url: "/",
+    active: "/" === window.location.pathname,
+  },
+  {
+    name: "Favorite",
+    icon: "fi-sr-heart",
+    url: "/favorite",
+    active: "/favorite" === window.location.pathname,
+  },
+  {
+    name: "Checkout",
+    icon: "fi-sr-sack-dollar",
+    url: "/checkout",
+    active: "/checkout" === window.location.pathname,
+  },
   { name: "Gift", icon: "fi-sr-gift", url: "", active: false },
   { name: "Chat", icon: "fi-ss-comments", url: "", active: false },
   { name: "Shop", icon: "fi-ss-shop", url: "", active: false },

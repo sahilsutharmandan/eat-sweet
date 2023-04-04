@@ -6,8 +6,17 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: HomeView
+      name: 'dashboard',
+      component: () => import('../pages/Dashboard/Dashboard.vue')
+    },
+    {
+      path: '/favorite',
+      name: 'favorite',
+      component: () => import('../pages/FavoriteFood/Index.vue')
+    },
+    {
+      path: '/:catchAll(.*)',
+      component: () => import('../pages/Errors/NotFound.vue')
     },
     {
       path: '/about',

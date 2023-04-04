@@ -1,8 +1,10 @@
 <template>
-  <div class="backdrop-blur-sm bg-white/20 shadow rounded-xl flex">
+  <!-- <div class="backdrop-blur-sm bg-white/20 shadow rounded-xl flex">
     <NavBar />
-    <div class="bg-white flex-1 rounded-xl p-6"><MainBody /></div>
-  </div>
+    <div class="bg-white flex-1 rounded-xl p-6">
+      <MainBody />
+    </div>
+  </div> -->
   <!-- <header class="">
     <img
       alt="Vue logo"
@@ -22,7 +24,7 @@
     </div>
   </header> -->
 
-  <!-- <RouterView /> -->
+  <RouterView />
 </template>
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
