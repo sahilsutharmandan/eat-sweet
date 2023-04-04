@@ -8,12 +8,12 @@
             Eatland &#128523
           </h1>
           <div>
-            <div class="rounded-xl bg-pink-100 pr-3 flex items-center">
+            <div class="rounded-xl bg-green-50 border border-green-100 pr-3 flex items-center">
               <input
                 type="text"
-                class="bg-pink-100 p-2.5 rounded-xl focus:border-none focus:outline-none"
+                class="bg-transparent p-2.5 rounded-xl focus:border-none focus:outline-none"
               />
-              <i class="fi fi-rr-search mt-1.5 text-pink-800"></i>
+              <i class="fi fi-rr-search mt-1.5 text-green-800"></i>
             </div>
           </div>
         </div>

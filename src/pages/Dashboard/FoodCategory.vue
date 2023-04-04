@@ -2,7 +2,7 @@
   <div class="grid grid-cols-7 gap-4">
     <div
       class="p-5 rounded-3xl hover:bg-white box-shadow duration-200 ease-linear"
-      :class="item.active ? 'shadows bg-white' : 'bg-gray-100'"
+      :class="item.active ? 'shadows bg-white' : 'bg-green-50'"
       v-for="(item, index) in category"
       :key="index"
     >
@@ -23,7 +23,7 @@ const category = ref([
   { label: "Drinks", src: "src/images/drinks.png", active: false },
 ]);
 </script>
-<style>
+<style scoped>
 .shadows {
   box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em,
     rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
