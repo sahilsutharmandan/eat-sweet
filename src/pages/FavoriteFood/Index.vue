@@ -1,17 +1,68 @@
 <template>
-  <FullPageLayout class="flex">
-    <div class="m-auto text-center flex-1 space-y-3">
-      <img class="w-1/5 m-auto" src="src\images\chef.png" alt="" />
-      <h1 class="text-4xl font-bold">Coming Soon</h1>
-      <p class="w-5/6 m-auto">
-        Our upcoming food delivery app will bring delicious meals from top-rated
-        chefs straight to your doorstep. Stay tuned for our launch date and be
-        one of the first to experience the convenience of ordering your favorite
-        cuisines in just a few taps.
-      </p>
+  <FullPageLayout>
+    <div class="space-y-3">
+      <main class="space-y-4">
+        <div class="flex gap-4">
+          <div class="w-3/4 space-y-4">
+            <FoodByCountry @get-food-by-country="getFood" />
+            <div class="">
+              <nav class="flex justify-between my-3">
+                <div class="flex items-center gap-2">
+                  <h2 class="text-xl font-semibold">All items</h2>
+                  <i class="fi fi-rr-settings-sliders mt-1.5"></i>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span>See All</span>
+                  <i class="fi fi-ss-arrow-right mt-1.5"></i>
+                </div>
+              </nav>
+              <div class="grid grid-cols-4 gap-4">
+                <FoodItems :meals="meals" />
+              </div>
+            </div>
+          </div>
+          <div class="flex-1 border rounded-2xl p-4 space-y-3">
+            <nav class="flex justify-between mt-1">
+              <div class="flex items-center gap-2">
+                <h2 class="text-xl font-semibold">Favorite</h2>
+              </div>
+            </nav>
+            <!-- <FavoriteFood /> -->
+            <div class="flex justify-end">
+              <div class="flex items-center gap-2">
+                <span>See All</span>
+                <i class="fi fi-ss-arrow-right mt-1.5"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
   </FullPageLayout>
 </template>
 <script setup>
-import FullPageLayout from "../../components/FullPageLayout.vue";
+// import FavoriteFood from "./FavoriteFood.vue";
+import FoodByCountry from "./FoodByCountry.vue";
+import FoodItems from "./FoodItems.vue";
+import { ref, onMounted, computed, watch } from "vue";
+import { useStore } from "vuex";
+const country = ref("Indian");
+const getFood = (value) => {
+  country.value = value;
+};
+const store = useStore();
+const getIndianMeals = (country) => {
+  store.dispatch("MealsModule/getIndianMeals", country);
+};
+const meals = computed(() => {
+  return store.getters["MealsModule/indainMeals"];
+});
+onMounted(() => {
+  getIndianMeals(country.value);
+});
+watch(() => {
+  meals;
+  // getIndianMeals();
+  store.getters["MealsModule/indainMeals"];
+});
 </script>

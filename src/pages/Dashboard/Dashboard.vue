@@ -6,7 +6,7 @@
           <div class="w-3/4 space-y-4">
             <FoodCategory />
             <div>
-              <nav class="flex justify-between mt-1">
+              <nav class="flex justify-between my-3">
                 <div class="flex items-center gap-2">
                   <h2 class="text-xl font-semibold">All items</h2>
                   <i class="fi fi-rr-settings-sliders mt-1.5"></i>
@@ -41,7 +41,6 @@
   </FullPageLayout>
 </template>
 <script setup>
-import FullPageLayout from "../../components/FullPageLayout.vue";
 import FavoriteFood from "./FavoriteFood.vue";
 import FoodCategory from "./FoodCategory.vue";
 import FoodItems from "./FoodItems.vue";

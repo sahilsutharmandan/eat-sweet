@@ -1,10 +1,10 @@
 import { createStore } from 'vuex';
-// import AuthModules from './modules/AuthModules.js';
-// import CurrentTimeGreeting from './modules/CurrentTimeGreeting.js';
+import MealsModule from './Modules/MealsModule.js'
+import GreetingModule from './Modules/GreetingModule.js'
 const store = createStore({
     modules: {
-        // AuthModules,
-        // greeting: CurrentTimeGreeting
+        MealsModule: MealsModule,
+        GreetingModule: GreetingModule
     }
 });
 export default store;
