@@ -83,14 +83,19 @@
 import { ref, onMounted, computed, watch } from "vue";
 import { useStore } from "vuex";
 import Dropdown from "primevue/dropdown";
+
 const store = useStore();
-const getMeals = (id) => {
+const selectedMeal = ref();
+const mealId = ref("52772");
+const country = ref("Indian");
+
+const getMealsById = (id) => {
   store.dispatch("MealsModule/getMealsById", id);
 };
 const meals = computed(() => {
   return store.getters["MealsModule/meals"];
 });
-const country = ref("Indian");
+
 const getIndianMeals = (country) => {
   store.dispatch("MealsModule/getIndianMeals", country);
 };
@@ -98,13 +103,11 @@ const indainMeals = computed(() => {
   return store.getters["MealsModule/indainMeals"];
 });
 
-const selectedMeal = ref();
-const mealId = ref("52772");
 onMounted(() => {
-  getMeals(mealId.value);
+  getMealsById(mealId.value);
   getIndianMeals(country.value);
 });
 watch(selectedMeal, (newValue) => {
-  getMeals(newValue.idMeal);
+  getMealsById(newValue.idMeal);
 });
 </script>
