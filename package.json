@@ -13,6 +13,8 @@
     "@vue-hero-icons/solid": "^1.7.2",
     "axios": "^1.3.4",
     "pinia": "^2.0.32",
+    "primeicons": "^6.0.1",
+    "primevue": "^3.26.1",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6",
     "vuex": "^4.0.2"

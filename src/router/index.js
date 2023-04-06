@@ -15,6 +15,11 @@ const router = createRouter({
       component: () => import('../pages/FavoriteFood/Index.vue')
     },
     {
+      path: '/products',
+      name: 'product',
+      component: () => import('../pages/Product/Index.vue')
+    },
+    {
       path: '/:catchAll(.*)',
       component: () => import('../pages/Errors/NotFound.vue')
     },

@@ -1,2 +1,20 @@
 @import "./base.css";
 @import "./style.css";
+
+/* Dropdown css here  */
+
+.p-dropdown {
+  @apply border py-1.5 px-3 w-52 rounded-md;
+}
+.p-dropdown-panel {
+  @apply bg-white rounded-md;
+}
+.p-dropdown-item {
+  @apply py-1 hover:bg-gray-200 px-1;
+}
+.p-dropdown-label {
+  @apply outline-none;
+}
+.p-hidden-accessible {
+  @apply hidden;
+}

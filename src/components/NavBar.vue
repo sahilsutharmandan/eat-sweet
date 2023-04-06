@@ -41,6 +41,12 @@ const navigation = ref([
   },
   {
     name: "Checkout",
+    icon: "fi fi-sr-restaurant",
+    url: "/products",
+    active: "/products" === window.location.pathname,
+  },
+  {
+    name: "Checkout",
     icon: "fi-sr-sack-dollar",
     url: "/checkout",
     active: "/checkout" === window.location.pathname,

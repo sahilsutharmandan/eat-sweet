@@ -14,6 +14,9 @@ export default {
         },
         GET_INDIAN_MEAL(state, data) {
             state.indainMeals = data?.data?.meals
+        },
+        GET_MEAL_BY_ID(state, data) {
+            state.meals = data?.data?.meals
         }
     },
     actions: {
@@ -26,6 +29,12 @@ export default {
 
             axios.get('https://www.themealdb.com/api/json/v1/1/filter.php?a=' + country).then((response) => {
                 context.commit('GET_INDIAN_MEAL', response)
+            })
+        },
+        getMealsById(context, mealId) {
+            axios.get('https://www.themealdb.com/api/json/v1/1/lookup.php?i=' + mealId).then((response) => {
+                context.commit('GET_MEAL_BY_ID', response)
+                console.log(mealId)
             })
         }
     },
