@@ -60,9 +60,8 @@ const meals = computed(() => {
 onMounted(() => {
   getIndianMeals(country.value);
 });
-watch(() => {
+watch(country, (newVal) => {
   meals;
-  // getIndianMeals();
-  store.getters["MealsModule/indainMeals"];
+  getIndianMeals(newVal);
 });
 </script>

@@ -2,10 +2,10 @@
   <div class="grid grid-cols-7 gap-4">
     <div
       class="p-5 rounded-3xl hover:bg-white box-shadow duration-200 ease-linear"
-      :class="item.active ? 'shadows bg-white' : 'bg-green-50'"
+      :class="mealIndex === index ? 'shadows bg-white' : 'bg-green-50'"
       v-for="(item, index) in category"
       :key="index"
-      @click="$emit('get-food-by-country', item.label)"
+      @click="$emit('get-food-by-country', item.label), itemIndex(index)"
     >
       <img class="w-14 m-auto" :src="item.src" alt="" />
       <p class="mt-2 text-center">{{ item.label }}</p>
@@ -20,9 +20,13 @@ const category = ref([
   { label: "Chinese", src: "src/images/china.png", active: false },
   { label: "American", src: "src/images/usa.png", active: false },
   { label: "Italian", src: "src/images/italy.png", active: false },
-  { label: "Turkey", src: "src/images/turkey.png", active: false },
+  { label: "Japanese", src: "src/images/japan.png", active: false },
   { label: "Canadian", src: "src/images/canada.png", active: false },
 ]);
+const mealIndex = ref(0);
+const itemIndex = (index) => {
+  mealIndex.value = index;
+};
 </script>
 <style scoped>
 .shadows {

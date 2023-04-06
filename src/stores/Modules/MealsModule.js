@@ -18,7 +18,7 @@ export default {
     },
     actions: {
         getMeals(context) {
-            axios.get('https://www.themealdb.com/api/json/v1/1/search.php?f=a').then((response) => {
+            axios.get('https://www.themealdb.com/api/json/v1/1/search.php?f=c').then((response) => {
                 context.commit('GET_MEAL', response)
             })
         },

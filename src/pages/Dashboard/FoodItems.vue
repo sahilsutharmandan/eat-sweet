@@ -1,9 +1,5 @@
 <template>
-  <div
-    class="aspect-square"
-    v-for="(item, index) in meals.slice(0, 3)"
-    :key="index"
-  >
+  <div class="aspect-square" v-for="(item, index) in meals" :key="index">
     <img
       :src="item.strMealThumb"
       class="w-32 aspect-square rounded-full object-center m-auto z-[1]"
