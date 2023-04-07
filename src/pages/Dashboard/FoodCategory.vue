@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-7 gap-4">
+  <div class="grid grid-cols-3 md:grid-cols-7 gap-4">
     <div
       class="p-5 rounded-3xl hover:bg-white box-shadow duration-200 ease-linear"
       :class="item.active ? 'shadows bg-white' : 'bg-green-50'"

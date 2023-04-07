@@ -1,18 +1,18 @@
 <template>
   <div class="backdrop-blur-sm bg-white/20 shadow rounded-xl flex
   ">
-    <NavBar />
+    <NavBar class="hidden md:block"/>
     <div class="bg-white flex-1 rounded-xl  flex flex-col overflow-y-auto" style="height: calc(100vh - 50px);">
       <header class="flex justify-between px-6 pt-6 sticky top-0 z-10 bg-white">
         <div class="w-3/4 flex justify-between">
-          <h1 v-if="header" class="text-2xl font-bold">
+          <h1 v-if="header" class="text-2xl font-bold hidden md:block">
             {{ header }}
           </h1>
-          <h1 v-else class="text-2xl font-bold">
+          <h1 v-else class="text-2xl font-bold hidden md:block">
             Welcome to <br />
             Eatland &#128523
           </h1>
-          <div>
+          <div class="hidden md:block">
             <div
               class="rounded-xl bg-green-50 border border-green-100 pr-3 flex items-center"
             >

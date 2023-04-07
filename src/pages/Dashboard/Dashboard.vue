@@ -2,8 +2,8 @@
   <FullPageLayout>
     <div class="space-y-3">
       <main class="space-y-4">
-        <div class="flex gap-4">
-          <div class="w-3/4 space-y-4">
+        <div class="lg:flex gap-4">
+          <div class="lg:w-3/4 space-y-4">
             <FoodCategory />
             <div>
               <nav class="flex justify-between my-3">
@@ -16,7 +16,7 @@
                   <i class="fi fi-ss-arrow-right mt-1.5"></i>
                 </div>
               </nav>
-              <div class="grid grid-cols-3 gap-4">
+              <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                 <FoodItems />
               </div>
             </div>

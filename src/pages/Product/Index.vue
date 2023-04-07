@@ -1,46 +1,81 @@
 <template>
   <FullPageLayout>
     <div class="mb-4">
-      <Dropdown
-        v-model="selectedMeal"
-        :options="indainMeals"
-        optionLabel="name"
-        placeholder="Select a Meal"
-        class="w-full"
-      >
-        <template #value="slotProps">
-          <div v-if="slotProps.value" class="flex align-items-center">
-            <img
-              :alt="slotProps.value.strMeal"
-              :src="slotProps.value.strMealThumb"
-              class="mr-2"
-              style="width: 18px"
-            />
-            <div>{{ slotProps.value.strMeal }}</div>
-          </div>
-          <span v-else>
-            {{ slotProps.placeholder }}
-          </span>
-        </template>
-        <template #option="slotProps">
-          <div class="flex align-items-center">
-            <img
-              :alt="slotProps.option.strMeal"
-              :src="slotProps.option.strMealThumb"
-              class="mr-2"
-              style="width: 18px"
-            />
-            <div>{{ slotProps.option.strMeal }}</div>
-          </div>
-        </template>
-      </Dropdown>
+      <div class="lg:flex space-y-4 gap-4 items-center">
+        <Dropdown
+          v-model="selectedMealType"
+          :options="mealsType"
+          optionLabel="name"
+          placeholder="Select a Meal Type"
+          class="w-full"
+        >
+          <template #value="slotProps">
+            <div v-if="slotProps.value" class="flex align-items-center">
+              <img
+                :alt="slotProps.value.strCategory"
+                :src="slotProps.value.strCategoryThumb"
+                class="mr-2"
+                style="width: 18px"
+              />
+              <div>{{ slotProps.value.strCategory }}</div>
+            </div>
+            <span v-else>
+              {{ slotProps.placeholder }}
+            </span>
+          </template>
+          <template #option="slotProps">
+            <div class="flex align-items-center">
+              <img
+                :alt="slotProps.option.strCategory"
+                :src="slotProps.option.strCategoryThumb"
+                class="mr-2"
+                style="width: 18px"
+              />
+              <div>{{ slotProps.option.strCategory }}</div>
+            </div>
+          </template>
+        </Dropdown>
+        <Dropdown
+          v-model="selectedMeal"
+          :options="mealsByCategory"
+          optionLabel="name"
+          placeholder="Select a Meal"
+          class="w-full"
+        >
+          <template #value="slotProps">
+            <div v-if="slotProps.value" class="flex align-items-center">
+              <img
+                :alt="slotProps.value.strMeal"
+                :src="slotProps.value.strMealThumb"
+                class="mr-2"
+                style="width: 18px"
+              />
+              <div>{{ slotProps.value.strMeal }}</div>
+            </div>
+            <span v-else>
+              {{ slotProps.placeholder }}
+            </span>
+          </template>
+          <template #option="slotProps">
+            <div class="flex align-items-center">
+              <img
+                :alt="slotProps.option.strMeal"
+                :src="slotProps.option.strMealThumb"
+                class="mr-2"
+                style="width: 18px"
+              />
+              <div>{{ slotProps.option.strMeal }}</div>
+            </div>
+          </template>
+        </Dropdown>
+      </div>
     </div>
-    <div class="flex gap-4" v-for="(item, index) in meals" :key="index">
-      <div class="w-3/4 flex gap-6">
-        <div class="w-1/3">
+    <div class="md:flex gap-4" v-for="(item, index) in meals" :key="index">
+      <div class="md:w-3/4 lg:flex gap-6">
+        <div class="lg:w-1/3">
           <img :src="item.strMealThumb" alt="" />
         </div>
-        <div class="w-2/3">
+        <div class="lg:w-2/3">
           <p>{{ item.strCategory }}</p>
           <h2 class="text-3xl font-semibold">{{ item.strMeal }}</h2>
           <p class="py-2">4.5 rating, 432 Reviews</p>
@@ -86,8 +121,10 @@ import Dropdown from "primevue/dropdown";
 
 const store = useStore();
 const selectedMeal = ref();
+const selectedMealType = ref();
 const mealId = ref("52772");
 const country = ref("Indian");
+const mealsCategory = ref("SeaFood");
 
 const getMealsById = (id) => {
   store.dispatch("MealsModule/getMealsById", id);
@@ -95,19 +132,29 @@ const getMealsById = (id) => {
 const meals = computed(() => {
   return store.getters["MealsModule/meals"];
 });
-
-const getIndianMeals = (country) => {
-  store.dispatch("MealsModule/getIndianMeals", country);
+const getMealsByCategory = (category) => {
+  store.dispatch("MealsModule/getMealsByCategory", category);
 };
-const indainMeals = computed(() => {
-  return store.getters["MealsModule/indainMeals"];
+const mealsByCategory = computed(() => {
+  return store.getters["MealsModule/mealsByCategory"];
+});
+const getMealsType = () => {
+  store.dispatch("MealsModule/getMealsType");
+};
+const mealsType = computed(() => {
+  return store.getters["MealsModule/mealsType"];
 });
 
 onMounted(() => {
   getMealsById(mealId.value);
-  getIndianMeals(country.value);
+  getMealsByCategory(mealsCategory.value);
+  getMealsType();
 });
 watch(selectedMeal, (newValue) => {
   getMealsById(newValue.idMeal);
+});
+watch(selectedMealType, (newValue) => {
+  getMealsByCategory(newValue.strCategory);
+  selectedMeal.value = "";
 });
 </script>
