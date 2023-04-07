@@ -1,5 +1,5 @@
 <template>
-  <div class="p-6 w-32 flex items-center flex-col">
+  <div class="p-6 w-32 hidden md:flex items-center flex-col">
     <h1 class="italic antialiased tracking-wide mb-8">
       <span class="text-gray-800 font-bold">eat</span>
       <span class="text-green-800 font-bold">dish</span>
@@ -23,6 +23,7 @@
       class="fi fi-rr-sign-out-alt px-2 py-2 rounded-xl mt-16 text-green-900"
     ></i>
   </div>
+  <div></div>
 </template>
 <script setup>
 import { ref } from "vue";

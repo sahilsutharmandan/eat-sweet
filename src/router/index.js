@@ -20,6 +20,11 @@ const router = createRouter({
       component: () => import('../pages/Product/Index.vue')
     },
     {
+      path: '/checkout',
+      name: 'checkout',
+      component: () => import('../pages/Checkout/Index.vue')
+    },
+    {
       path: '/:catchAll(.*)',
       component: () => import('../pages/Errors/NotFound.vue')
     },

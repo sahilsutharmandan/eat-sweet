@@ -5,6 +5,7 @@ import App from './App.vue'
 import router from './router'
 import FullPageLayout from './components/FullPageLayout.vue'
 import DropDown from './components/DropDown.vue'
+import HeaderNavbar from './components/HeaderNavbar.vue'
 import PrimeVue from 'primevue/config';
 import './assets/main.css'
 import '@flaticon/flaticon-uicons/css/all/all.css';
@@ -17,4 +18,5 @@ app.use(stores)
 app.use(PrimeVue)
 app.component('FullPageLayout', FullPageLayout)
 app.component('DropDown', DropDown)
+app.component('HeaderNavbar', HeaderNavbar)
 app.mount('#app')

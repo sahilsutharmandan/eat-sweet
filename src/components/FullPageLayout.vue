@@ -1,9 +1,11 @@
 <template>
-  <div class="backdrop-blur-sm bg-white/20 shadow rounded-xl flex
-  ">
-    <NavBar class="hidden md:block"/>
-    <div class="bg-white flex-1 rounded-xl  flex flex-col overflow-y-auto" style="height: calc(100vh - 50px);">
-      <header class="flex justify-between px-6 pt-6 sticky top-0 z-10 bg-white">
+  <div class="backdrop-blur-sm bg-white/20 shadow rounded-xl flex">
+    <NavBar />
+    <div
+      class="bg-white flex-1 rounded-xl flex flex-col overflow-y-auto"
+      style="height: calc(100vh - 50px)"
+    >
+      <!-- <header class="flex justify-between px-6 pt-6 sticky top-0 z-10 bg-white">
         <div class="w-3/4 flex justify-between">
           <h1 v-if="header" class="text-2xl font-bold hidden md:block">
             {{ header }}
@@ -29,9 +31,9 @@
             <i class="fi fi-rr-shopping-cart"></i>
           </div>
         </div>
-      </header>
+      </header> -->
+      <HeaderNavbar />
       <div class="flex-1 p-6" :class="class">
-
         <slot></slot>
       </div>
       <!-- <MainBody /> -->
