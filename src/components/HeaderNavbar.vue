@@ -109,20 +109,7 @@
       <div class="h-6 w-px bg-gray-200 md:hidden" aria-hidden="true" />
 
       <div class="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
-        <form class="relative flex flex-1" action="#" method="GET">
-          <label for="search-field" class="sr-only">Search</label>
-          <MagnifyingGlassIcon
-            class="pointer-events-none absolute inset-y-0 left-0 h-full w-5 text-gray-400"
-            aria-hidden="true"
-          />
-          <input
-            id="search-field"
-            class="block h-full w-full border-0 py-0 pl-8 pr-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm"
-            placeholder="Search..."
-            type="search"
-            name="search"
-          />
-        </form>
+        <slot></slot>
         <div class="flex items-center gap-x-4 lg:gap-x-6">
           <button
             type="button"

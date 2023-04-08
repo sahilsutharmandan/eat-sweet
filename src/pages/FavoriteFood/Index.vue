@@ -1,5 +1,5 @@
 <template>
-  <FullPageLayout>
+  <FullPageLayout @search-recipe="searchRecipe">
     <div class="space-y-3">
       <main class="space-y-4">
         <div class="lg:flex gap-4">
@@ -17,7 +17,7 @@
                 </div>
               </nav>
               <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <FoodItems :foodItems="getRecipes?.data?.hits" />
+                <FoodItem :foodItems="getRecipes?.data?.hits" />
               </div>
             </div>
           </div>
@@ -43,10 +43,11 @@
 <script setup>
 import { ref, onMounted, computed, watch } from "vue";
 import FoodByCountry from "./FoodByCountry.vue";
-import FoodItems from "./FoodItems.vue";
+
 import { useStore } from "vuex";
 const store = useStore();
 const country = ref("Indian");
+const searchFoodRecipe = ref();
 const getFood = (value) => {
   country.value = value;
 };
@@ -56,6 +57,9 @@ const getRecipe = (category) => {
 const getRecipes = computed(() => {
   return store.getters["FoodRecipeModule/getRecipe"];
 });
+const searchRecipe = (value) => {
+  searchFoodRecipe.value = value;
+};
 onMounted(() => {
   getRecipes;
   getRecipe(country.value);
@@ -63,6 +67,9 @@ onMounted(() => {
 
 watch(country, (newVal) => {
   getRecipes;
+  getRecipe(newVal);
+});
+watch(searchFoodRecipe, (newVal) => {
   getRecipe(newVal);
 });
 </script>

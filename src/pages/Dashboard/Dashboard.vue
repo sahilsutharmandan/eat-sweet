@@ -1,5 +1,5 @@
 <template>
-  <FullPageLayout>
+  <FullPageLayout @search-recipe="searchRecipe">
     <div class="space-y-3">
       <main class="space-y-4">
         <div class="lg:flex gap-4">
@@ -17,7 +17,7 @@
                 </div>
               </nav>
               <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <FoodItems :foodItems="getRecipes?.data?.hits" />
+                <FoodItem :foodItems="getRecipes?.data?.hits" />
               </div>
             </div>
           </div>
@@ -27,7 +27,7 @@
                 <h2 class="text-xl font-semibold">Favorite</h2>
               </div>
             </nav>
-            <FavoriteFood />
+
             <div class="flex justify-end">
               <div class="flex items-center gap-2">
                 <span>See All</span>
@@ -42,12 +42,12 @@
 </template>
 <script setup>
 import { ref, onMounted, computed, watch } from "vue";
-import FavoriteFood from "./FavoriteFood.vue";
 import FoodCategory from "./FoodCategory.vue";
-import FoodItems from "./FoodItems.vue";
+
 import { useStore } from "vuex";
 const store = useStore();
 const FoodCategories = ref("Vegetarian");
+const searchFoodRecipe = ref();
 const getFoodByCategory = (value) => {
   FoodCategories.value = value;
 };
@@ -57,12 +57,18 @@ const getRecipe = (category) => {
 const getRecipes = computed(() => {
   return store.getters["FoodRecipeModule/getRecipe"];
 });
+const searchRecipe = (value) => {
+  searchFoodRecipe.value = value;
+};
 onMounted(() => {
   getRecipes;
   getRecipe(FoodCategories.value);
 });
 
 watch(FoodCategories, (newVal) => {
+  getRecipe(newVal);
+});
+watch(searchFoodRecipe, (newVal) => {
   getRecipe(newVal);
 });
 </script>

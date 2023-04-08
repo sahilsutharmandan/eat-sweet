@@ -5,34 +5,27 @@
       class="bg-white flex-1 rounded-xl flex flex-col overflow-y-auto"
       style="height: calc(100vh - 50px)"
     >
-      <!-- <header class="flex justify-between px-6 pt-6 sticky top-0 z-10 bg-white">
-        <div class="w-3/4 flex justify-between">
-          <h1 v-if="header" class="text-2xl font-bold hidden md:block">
-            {{ header }}
-          </h1>
-          <h1 v-else class="text-2xl font-bold hidden md:block">
-            Welcome to <br />
-            Eatland &#128523
-          </h1>
-          <div class="hidden md:block">
-            <div
-              class="rounded-xl bg-green-50 border border-green-100 pr-3 flex items-center"
-            >
-              <input
-                type="text"
-                class="bg-transparent p-2.5 rounded-xl focus:border-none focus:outline-none"
-              />
-              <i class="fi fi-rr-search mt-1.5 text-green-800"></i>
-            </div>
-          </div>
-        </div>
-        <div>
-          <div class="p-4 pb-3 rounded-xl bg-slate-700 text-white">
-            <i class="fi fi-rr-shopping-cart"></i>
-          </div>
-        </div>
-      </header> -->
-      <HeaderNavbar />
+      <HeaderNavbar>
+        <form
+          @submit.prevent="$emit('search-recipe', searchFoodRecipe)"
+          class="relative flex flex-1"
+          action="#"
+          method="GET"
+        >
+          <label for="search-field" class="sr-only">Search</label>
+          <MagnifyingGlassIcon
+            class="pointer-events-none absolute inset-y-0 left-0 h-full w-5 text-gray-400"
+            aria-hidden="true"
+          />
+          <input
+            id="search-field"
+            class="block h-full w-full border-0 py-0 pl-8 pr-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm outline-none"
+            placeholder="Search..."
+            type="search"
+            name="search"
+            v-model="searchFoodRecipe"
+          /></form
+      ></HeaderNavbar>
       <div class="flex-1 p-6" :class="class">
         <slot></slot>
       </div>
@@ -41,9 +34,12 @@
   </div>
 </template>
 <script setup>
+import { ref } from "vue";
 import NavBar from "./NavBar.vue";
+import { MagnifyingGlassIcon } from "@heroicons/vue/20/solid";
 const props = defineProps({
   class: String,
   header: String,
 });
+const searchFoodRecipe = ref();
 </script>
