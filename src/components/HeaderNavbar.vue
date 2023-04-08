@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="sticky top-0 z-50">
     <TransitionRoot as="template" :show="sidebarOpen">
       <Dialog
         as="div"
@@ -113,6 +113,16 @@
         <div class="flex items-center gap-x-4 lg:gap-x-6">
           <button
             type="button"
+            class="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500 [&_.p-badge]:text-xs [&_.p-badge]:min-w-[1rem] [&_.p-badge]:h-[1rem] [&_.p-badge]:bg-green-500"
+          >
+            <span class="sr-only">View notifications</span>
+            <!-- <i v-badge="2" class="fi fi-rr-shopping-cart text-xl" /> -->
+            <span v-badge="2" class="w-6 h-6">
+              <ShoppingCartIcon class="h-6 w-6" aria-hidden="true" />
+            </span>
+          </button>
+          <button
+            type="button"
             class="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500"
           >
             <span class="sr-only">View notifications</span>
@@ -203,9 +213,9 @@ import {
   HomeIcon,
   UsersIcon,
   XMarkIcon,
+  ShoppingCartIcon,
 } from "@heroicons/vue/24/outline";
 import { ChevronDownIcon, MagnifyingGlassIcon } from "@heroicons/vue/20/solid";
-
 const navigation = ref([
   {
     name: "Dashboard",

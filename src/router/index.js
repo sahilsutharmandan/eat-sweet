@@ -10,9 +10,9 @@ const router = createRouter({
       component: () => import('../pages/Dashboard/Dashboard.vue')
     },
     {
-      path: '/favorite',
-      name: 'favorite',
-      component: () => import('../pages/FavoriteFood/Index.vue')
+      path: '/by-country',
+      name: 'by country',
+      component: () => import('../pages/FoodByCountry/Index.vue')
     },
     {
       path: '/products',
@@ -23,6 +23,11 @@ const router = createRouter({
       path: '/checkout',
       name: 'checkout',
       component: () => import('../pages/Checkout/Index.vue')
+    },
+    {
+      path: '/favorite',
+      name: 'favorite',
+      component: () => import('../pages/Favorite/Index.vue')
     },
     {
       path: '/:catchAll(.*)',

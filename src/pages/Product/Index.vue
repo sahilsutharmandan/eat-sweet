@@ -1,7 +1,7 @@
 <template>
   <FullPageLayout>
     <div class="mb-4">
-      <div class="lg:flex space-y-4 gap-4 items-center">
+      <div class="lg:flex gap-4 items-center">
         <Dropdown
           v-model="selectedMealType"
           :options="mealsType"
@@ -13,9 +13,8 @@
             <div v-if="slotProps.value" class="flex align-items-center">
               <img
                 :alt="slotProps.value.strCategory"
-                :src="slotProps.value.strCategoryThumb"
-                class="mr-2"
-                style="width: 18px"
+                v-lazy="slotProps.value.strCategoryThumb"
+                class="mr-2 w-6 aspect-square shrink-0"
               />
               <div>{{ slotProps.value.strCategory }}</div>
             </div>
@@ -27,9 +26,8 @@
             <div class="flex align-items-center">
               <img
                 :alt="slotProps.option.strCategory"
-                :src="slotProps.option.strCategoryThumb"
-                class="mr-2"
-                style="width: 18px"
+                v-lazy="slotProps.option.strCategoryThumb"
+                class="mr-2 w-6 aspect-square shrink-0"
               />
               <div>{{ slotProps.option.strCategory }}</div>
             </div>
@@ -46,9 +44,8 @@
             <div v-if="slotProps.value" class="flex align-items-center">
               <img
                 :alt="slotProps.value.strMeal"
-                :src="slotProps.value.strMealThumb"
-                class="mr-2"
-                style="width: 18px"
+                v-lazy="slotProps.value.strMealThumb"
+                class="mr-2 w-6 aspect-square shrink-0"
               />
               <div>{{ slotProps.value.strMeal }}</div>
             </div>
@@ -57,14 +54,13 @@
             </span>
           </template>
           <template #option="slotProps">
-            <div class="flex align-items-center">
+            <div class="flex align-items-center max-w-sm">
               <img
                 :alt="slotProps.option.strMeal"
-                :src="slotProps.option.strMealThumb"
-                class="mr-2"
-                style="width: 18px"
+                v-lazy="slotProps.option.strMealThumb"
+                class="mr-2 w-6 aspect-square shrink-0"
               />
-              <div>{{ slotProps.option.strMeal }}</div>
+              <div class="line-clamp-1">{{ slotProps.option.strMeal }}</div>
             </div>
           </template>
         </Dropdown>

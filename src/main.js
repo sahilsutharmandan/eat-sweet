@@ -10,9 +10,13 @@ import FoodItem from './components/FoodItem.vue'
 import FavoriteRecipe from './components/FavoriteRecipe.vue'
 import PrimeVue from 'primevue/config';
 import VueLazyload from 'vue-lazyload'
+import Badge from 'primevue/badge';
+import BadgeDirective from 'primevue/badgedirective';
 import './assets/main.css'
 import '@flaticon/flaticon-uicons/css/all/all.css';
 import 'primeicons/primeicons.css';
+import "primevue/resources/primevue.min.css";
+import "primevue/resources/themes/lara-light-indigo/theme.css";
 const app = createApp(App)
 
 app.use(createPinia())
@@ -20,9 +24,12 @@ app.use(router)
 app.use(stores)
 app.use(PrimeVue)
 app.use(VueLazyload)
+app.use(Badge)
 app.component('FullPageLayout', FullPageLayout)
 app.component('DropDown', DropDown)
 app.component('HeaderNavbar', HeaderNavbar)
 app.component('FoodItem', FoodItem)
 app.component('FavoriteRecipe', FavoriteRecipe)
+
+app.directive('badge', BadgeDirective);
 app.mount('#app')

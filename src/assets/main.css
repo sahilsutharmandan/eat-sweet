@@ -4,7 +4,7 @@
 /* Dropdown css here  */
 
 .p-dropdown {
-  @apply border py-1.5 px-3 w-52 rounded-md;
+  @apply border w-52 rounded-md;
 }
 .p-dropdown-panel {
   @apply bg-white rounded-md;
