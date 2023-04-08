@@ -21,20 +21,7 @@
               </div>
             </div>
           </div>
-          <div class="flex-1 border rounded-2xl p-4 space-y-3">
-            <nav class="flex justify-between mt-1">
-              <div class="flex items-center gap-2">
-                <h2 class="text-xl font-semibold">Favorite</h2>
-              </div>
-            </nav>
-            <FavoriteFood />
-            <div class="flex justify-end">
-              <div class="flex items-center gap-2">
-                <span>See All</span>
-                <i class="fi fi-ss-arrow-right mt-1.5"></i>
-              </div>
-            </div>
-          </div>
+          <FavoriteRecipe />
         </div>
       </main>
     </div>

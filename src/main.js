@@ -7,6 +7,7 @@ import FullPageLayout from './components/FullPageLayout.vue'
 import DropDown from './components/DropDown.vue'
 import HeaderNavbar from './components/HeaderNavbar.vue'
 import FoodItem from './components/FoodItem.vue'
+import FavoriteRecipe from './components/FavoriteRecipe.vue'
 import PrimeVue from 'primevue/config';
 import VueLazyload from 'vue-lazyload'
 import './assets/main.css'
@@ -23,4 +24,5 @@ app.component('FullPageLayout', FullPageLayout)
 app.component('DropDown', DropDown)
 app.component('HeaderNavbar', HeaderNavbar)
 app.component('FoodItem', FoodItem)
+app.component('FavoriteRecipe', FavoriteRecipe)
 app.mount('#app')

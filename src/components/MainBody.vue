@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="space-y-3">
     <header class="flex justify-between">
       <div class="w-3/4 flex justify-between">
@@ -65,4 +65,5 @@
 import FavoriteFood from "../pages/Dashboard/FavoriteFood.vue";
 import FoodCategory from "../pages/Dashboard/FoodCategory.vue";
 import FoodItems from "../pages/Dashboard/FoodItems.vue";
-</script>
+</script> -->
+<template>lsdjkf</template>

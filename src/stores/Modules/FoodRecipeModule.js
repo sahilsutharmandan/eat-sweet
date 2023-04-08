@@ -4,11 +4,20 @@ export default {
     state() {
         return {
             recipe: [],
+            favoriteRecipe: []
         }
     },
     mutations: {
         GET_RECIPE(state, data) {
             state.recipe = data
+        },
+        FAVORITE_RECIPE(state, recipe) {
+            const existingRecipe = state.favoriteRecipe.find(item => item.label === recipe.label);
+            if (!existingRecipe) {
+                state.favoriteRecipe.push(recipe);
+            } else {
+                state.favoriteRecipe = state.favoriteRecipe.filter(item => item.label !== recipe.label);
+            }
         }
     },
     actions: {
@@ -20,12 +29,19 @@ export default {
                 console.log(error)
             }
         },
+        isFavoriteRecipe(context, favoriteRecipe) {
+            context.commit('FAVORITE_RECIPE', favoriteRecipe)
+
+        }
 
     },
     getters: {
         getRecipe(state) {
             return state.recipe
         },
+        favoriteRecipe(state) {
+            return state.favoriteRecipe
+        }
 
     }
 }
