@@ -5,7 +5,7 @@
         <div class="lg:flex gap-4">
           <div class="lg:w-3/4 space-y-4">
             <FoodByCountry @get-food-by-country="getFood" />
-            <div class="">
+            <div>
               <nav class="flex justify-between my-3">
                 <div class="flex items-center gap-2">
                   <h2 class="text-xl font-semibold">All items</h2>
@@ -16,8 +16,8 @@
                   <i class="fi fi-ss-arrow-right mt-1.5"></i>
                 </div>
               </nav>
-              <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                <FoodItems :meals="meals" />
+              <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <FoodItems :foodItems="getRecipes?.data?.hits" />
               </div>
             </div>
           </div>
@@ -27,7 +27,7 @@
                 <h2 class="text-xl font-semibold">Favorite</h2>
               </div>
             </nav>
-            <!-- <FavoriteFood /> -->
+            <FavoriteFood />
             <div class="flex justify-end">
               <div class="flex items-center gap-2">
                 <span>See All</span>
@@ -41,27 +41,28 @@
   </FullPageLayout>
 </template>
 <script setup>
-// import FavoriteFood from "./FavoriteFood.vue";
+import { ref, onMounted, computed, watch } from "vue";
 import FoodByCountry from "./FoodByCountry.vue";
 import FoodItems from "./FoodItems.vue";
-import { ref, onMounted, computed, watch } from "vue";
 import { useStore } from "vuex";
+const store = useStore();
 const country = ref("Indian");
 const getFood = (value) => {
   country.value = value;
 };
-const store = useStore();
-const getIndianMeals = (country) => {
-  store.dispatch("MealsModule/getIndianMeals", country);
+const getRecipe = (category) => {
+  store.dispatch("FoodRecipeModule/getRecipe", category);
 };
-const meals = computed(() => {
-  return store.getters["MealsModule/indainMeals"];
+const getRecipes = computed(() => {
+  return store.getters["FoodRecipeModule/getRecipe"];
 });
 onMounted(() => {
-  getIndianMeals(country.value);
+  getRecipes;
+  getRecipe(country.value);
 });
+
 watch(country, (newVal) => {
-  meals;
-  getIndianMeals(newVal);
+  getRecipes;
+  getRecipe(newVal);
 });
 </script>

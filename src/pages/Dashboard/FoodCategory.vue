@@ -2,9 +2,10 @@
   <div class="grid grid-cols-3 md:grid-cols-7 gap-4">
     <div
       class="p-5 rounded-3xl hover:bg-white box-shadow duration-200 ease-linear"
-      :class="item.active ? 'shadows bg-white' : 'bg-green-50'"
+      :class="index === categoryIndx ? 'shadows bg-white' : 'bg-green-50'"
       v-for="(item, index) in category"
       :key="index"
+      @click="$emit('food-category', item.label), categoryIndex(index)"
     >
       <img class="w-14 m-auto" :src="item.src" alt="" />
       <p class="mt-2 text-center">{{ item.label }}</p>
@@ -14,14 +15,18 @@
 <script setup>
 import { ref } from "vue";
 const category = ref([
-  { label: "All Food", src: "src/images/all.png", active: true },
-  { label: "Burgers", src: "src/images/burger.png", active: false },
-  { label: "Pizza", src: "src/images/pizza.png", active: false },
-  { label: "Fruits", src: "src/images/fruits.png", active: false },
-  { label: "Cakes", src: "src/images/cupcake.png", active: false },
-  { label: "IceCreams", src: "src/images/icecream.png", active: false },
-  { label: "Drinks", src: "src/images/drinks.png", active: false },
+  { label: "Vegetarian", src: "src/images/all.png" },
+  { label: "Burgers", src: "src/images/burger.png" },
+  { label: "Pizza", src: "src/images/pizza.png" },
+  { label: "Fruits", src: "src/images/fruits.png" },
+  { label: "Cakes", src: "src/images/cupcake.png" },
+  { label: "IceCreams", src: "src/images/icecream.png" },
+  { label: "Drinks", src: "src/images/drinks.png" },
 ]);
+const categoryIndx = ref(0);
+const categoryIndex = (index) => {
+  categoryIndx.value = index;
+};
 </script>
 <style scoped>
 .shadows {

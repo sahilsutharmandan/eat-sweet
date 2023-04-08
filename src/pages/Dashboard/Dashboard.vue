@@ -4,7 +4,7 @@
       <main class="space-y-4">
         <div class="lg:flex gap-4">
           <div class="lg:w-3/4 space-y-4">
-            <FoodCategory />
+            <FoodCategory @food-category="getFoodByCategory" />
             <div>
               <nav class="flex justify-between my-3">
                 <div class="flex items-center gap-2">
@@ -17,7 +17,7 @@
                 </div>
               </nav>
               <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <FoodItems />
+                <FoodItems :foodItems="getRecipes?.data?.hits" />
               </div>
             </div>
           </div>
@@ -41,7 +41,28 @@
   </FullPageLayout>
 </template>
 <script setup>
+import { ref, onMounted, computed, watch } from "vue";
 import FavoriteFood from "./FavoriteFood.vue";
 import FoodCategory from "./FoodCategory.vue";
 import FoodItems from "./FoodItems.vue";
+import { useStore } from "vuex";
+const store = useStore();
+const FoodCategories = ref("Vegetarian");
+const getFoodByCategory = (value) => {
+  FoodCategories.value = value;
+};
+const getRecipe = (category) => {
+  store.dispatch("FoodRecipeModule/getRecipe", category);
+};
+const getRecipes = computed(() => {
+  return store.getters["FoodRecipeModule/getRecipe"];
+});
+onMounted(() => {
+  getRecipes;
+  getRecipe(FoodCategories.value);
+});
+
+watch(FoodCategories, (newVal) => {
+  getRecipe(newVal);
+});
 </script>
