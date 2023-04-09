@@ -1,13 +1,13 @@
 <template>
   <FullPageLayout>
     <div class="mb-4">
-      <div class="lg:flex gap-4 items-center">
+      <div class="md:flex space-y-4 md:space-y-0 gap-4 items-center lg:w-1/3">
         <Dropdown
           v-model="selectedMealType"
           :options="mealsType"
           optionLabel="name"
           placeholder="Select a Meal Type"
-          class="w-full"
+          class="w-1/2"
         >
           <template #value="slotProps">
             <div v-if="slotProps.value" class="flex align-items-center">
@@ -38,7 +38,6 @@
           :options="mealsByCategory"
           optionLabel="name"
           placeholder="Select a Meal"
-          class="w-full"
         >
           <template #value="slotProps">
             <div v-if="slotProps.value" class="flex align-items-center">

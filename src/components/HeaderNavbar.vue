@@ -223,33 +223,41 @@ const navigation = ref([
     active: "/" === window.location.pathname,
   },
   {
-    name: "Favorite",
-    icon: "fi-sr-heart",
-    url: "/favorite",
-    active: "/favorite" === window.location.pathname,
+    name: "Country",
+    icon: "fi fi-rr-flag",
+    url: "/by-country",
+    active: "/by-country" === window.location.pathname,
   },
   {
-    name: "Checkout",
+    name: "Recipe",
     icon: "fi fi-sr-restaurant",
+    url: "/recipe",
+    active: "/recipe" === window.location.pathname,
+  },
+  {
+    name: "Products",
+    icon: "fi fi-sr-hamburger-soda",
     url: "/products",
     active: "/products" === window.location.pathname,
   },
+  {
+    name: "Favorite",
+    icon: "fi-sr-heart ",
+    url: "/favorite",
+    active: "/favorite" === window.location.pathname,
+  },
+
   {
     name: "Checkout",
     icon: "fi-sr-sack-dollar",
     url: "/checkout",
     active: "/checkout" === window.location.pathname,
   },
-  { name: "Gift", icon: "fi-sr-gift", url: "", active: false },
-  { name: "Chat", icon: "fi-ss-comments", url: "", active: false },
-  { name: "Shop", icon: "fi-ss-shop", url: "", active: false },
-  { name: "Setting", icon: "fi-sr-settings", url: "", active: false },
+  // { name: "Chat", icon: "fi-ss-comments", url: "", active: false },
+  // { name: "Shop", icon: "fi-ss-shop", url: "", active: false },
+  // { name: "Setting", icon: "fi-sr-settings", url: "", active: false },
 ]);
-const teams = [
-  { id: 1, name: "Heroicons", href: "#", initial: "H", current: false },
-  { id: 2, name: "Tailwind Labs", href: "#", initial: "T", current: false },
-  { id: 3, name: "Workcation", href: "#", initial: "W", current: false },
-];
+
 const userNavigation = [
   { name: "Your profile", href: "#" },
   { name: "Sign out", href: "#" },
