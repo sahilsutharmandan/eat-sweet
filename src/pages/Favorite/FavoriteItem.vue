@@ -6,7 +6,9 @@
       alt=""
     />
     <div class="border rounded-3xl -mt-14 pt-16 pb-4 px-5 space-y-2">
-      <h3 class="font-semibold line-clamp-1">{{ item.label }}</h3>
+      <router-link to="/recipe-details" @click="getRecipeDetails(item)">
+        <h3 class="font-semibold line-clamp-1">{{ item.label }}</h3>
+      </router-link>
       <div
         class="flex justify-between border- py-1 border-green-100 text-gray-500 text-sm"
       >
@@ -57,4 +59,7 @@ const favoriteRecipe = computed(() => {
 function isFavorite(item) {
   return favoriteRecipe.value.some((fav) => fav.label === item);
 }
+const getRecipeDetails = (recipe) => {
+  store.dispatch("FoodRecipeModule/getRecipeDetails", recipe);
+};
 </script>

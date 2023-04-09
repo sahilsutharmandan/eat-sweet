@@ -7,7 +7,10 @@
     >
       <HeaderNavbar>
         <form
-          @submit.prevent="$emit('search-recipe', searchFoodRecipe)"
+          @submit.prevent="
+            $emit('search-recipe', searchFoodRecipe),
+              (isSearchPanelVisible = true)
+          "
           class="relative flex flex-1"
           action="#"
           method="GET"
@@ -24,8 +27,32 @@
             type="search"
             name="search"
             v-model="searchFoodRecipe"
-          /></form
-      ></HeaderNavbar>
+          />
+          <div
+            class="absolute bg-white border border-t-0 rounded-b-lg px-2 py-1 w-96 top-16 max-h-[300px] overflow-y-auto"
+            :class="
+              isSearchPanelVisible &&
+              searchFoodRecipe !== '' &&
+              searchPanelVisible
+                ? 'block'
+                : 'hidden'
+            "
+          >
+            <router-link
+              to="/recipe-details"
+              @click="
+                getRecipeDetails(item.recipe), (isSearchPanelVisible = false)
+              "
+              v-for="item in getRecipes?.data?.hits"
+              :key="item"
+              class="flex gap-2 items-center hover:bg-gray-100 p-2 rounded-md"
+            >
+              <img v-lazy="item.recipe.image" class="w-7 shrink-0" alt="" />
+              <span class="flex-1 line-clamp-1">{{ item.recipe.label }}</span>
+            </router-link>
+          </div>
+        </form></HeaderNavbar
+      >
       <div class="flex-1 p-6" :class="class">
         <slot></slot>
       </div>
@@ -34,12 +61,25 @@
   </div>
 </template>
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import NavBar from "./NavBar.vue";
 import { MagnifyingGlassIcon } from "@heroicons/vue/20/solid";
+import { useStore } from "vuex";
 const props = defineProps({
   class: String,
   header: String,
+  searchPanelVisible: {
+    type: Boolean,
+    default: false,
+  },
 });
+const isSearchPanelVisible = ref(false);
+const store = useStore();
 const searchFoodRecipe = ref();
+const getRecipes = computed(() => {
+  return store.getters["FoodRecipeModule/getRecipe"];
+});
+const getRecipeDetails = (recipe) => {
+  store.dispatch("FoodRecipeModule/getRecipeDetails", recipe);
+};
 </script>

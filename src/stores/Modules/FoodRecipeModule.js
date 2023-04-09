@@ -4,7 +4,8 @@ export default {
     state() {
         return {
             recipe: [],
-            favoriteRecipe: []
+            favoriteRecipe: [],
+            recipeDetails: []
         }
     },
     mutations: {
@@ -18,6 +19,10 @@ export default {
             } else {
                 state.favoriteRecipe = state.favoriteRecipe.filter(item => item.label !== recipe.label);
             }
+        },
+        GET_RECIPE_DETAILS(state, recipe) {
+            state.recipeDetails = recipe
+            console.log(recipe)
         }
     },
     actions: {
@@ -32,6 +37,9 @@ export default {
         isFavoriteRecipe(context, favoriteRecipe) {
             context.commit('FAVORITE_RECIPE', favoriteRecipe)
 
+        },
+        getRecipeDetails(context, recipe) {
+            context.commit('GET_RECIPE_DETAILS', recipe)
         }
 
     },
@@ -41,6 +49,9 @@ export default {
         },
         favoriteRecipe(state) {
             return state.favoriteRecipe
+        },
+        recipeDetails(state) {
+            return state.recipeDetails
         }
 
     }

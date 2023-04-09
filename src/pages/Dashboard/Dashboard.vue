@@ -3,17 +3,13 @@
     <div class="space-y-3">
       <main class="space-y-4">
         <div class="lg:flex gap-4">
-          <div class="lg:w-3/4 space-y-4">
+          <div class="lg:w-3/4 space-y-5">
             <FoodCategory @food-category="getFoodByCategory" />
             <div>
-              <nav class="flex justify-between my-3">
+              <nav class="flex justify-between my-4">
                 <div class="flex items-center gap-2">
                   <h2 class="text-xl font-semibold">All items</h2>
                   <i class="fi fi-rr-settings-sliders mt-1.5"></i>
-                </div>
-                <div class="flex items-center gap-2">
-                  <span>See All</span>
-                  <i class="fi fi-ss-arrow-right mt-1.5"></i>
                 </div>
               </nav>
               <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -48,7 +44,7 @@ const searchRecipe = (value) => {
   searchFoodRecipe.value = value;
 };
 onMounted(() => {
-  getRecipes;
+  // getRecipes;
   getRecipe(FoodCategories.value);
 });
 

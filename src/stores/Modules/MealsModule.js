@@ -24,7 +24,7 @@ export default {
         },
         GET_MEAL_TYPE(state, data) {
             state.mealsType = data?.data?.categories
-            console.log(data?.data?.categories)
+
         }
     },
     actions: {
@@ -54,7 +54,7 @@ export default {
         getMealsType(context,) {
             axios.get('https://www.themealdb.com/api/json/v1/1/categories.php').then((response) => {
                 context.commit('GET_MEAL_TYPE', response)
-                console.log(response)
+
             })
         }
     },

@@ -111,16 +111,15 @@
       <div class="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
         <slot></slot>
         <div class="flex items-center gap-x-4 lg:gap-x-6">
-          <button
+          <!-- <button
             type="button"
             class="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500 [&_.p-badge]:text-xs [&_.p-badge]:min-w-[1rem] [&_.p-badge]:h-[1rem] [&_.p-badge]:bg-green-500"
           >
             <span class="sr-only">View notifications</span>
-            <!-- <i v-badge="2" class="fi fi-rr-shopping-cart text-xl" /> -->
             <span v-badge="2" class="w-6 h-6">
               <ShoppingCartIcon class="h-6 w-6" aria-hidden="true" />
             </span>
-          </button>
+          </button> -->
           <button
             type="button"
             class="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500"
@@ -141,7 +140,7 @@
               <span class="sr-only">Open user menu</span>
               <img
                 class="h-8 w-8 rounded-full bg-gray-50"
-                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                src="src\images\user-logo.png"
                 alt=""
               />
               <span class="hidden lg:flex lg:items-center">

@@ -11,7 +11,7 @@ const router = createRouter({
     },
     {
       path: '/by-country',
-      name: 'by country',
+      name: 'by_country',
       component: () => import('../pages/FoodByCountry/Index.vue')
     },
     {
@@ -28,6 +28,16 @@ const router = createRouter({
       path: '/favorite',
       name: 'favorite',
       component: () => import('../pages/Favorite/Index.vue')
+    },
+    {
+      path: '/recipe',
+      name: 'recipe',
+      component: () => import('../pages/Recipe/Index.vue')
+    },
+    {
+      path: '/recipe-details',
+      name: 'recipe_details',
+      component: () => import('../pages/RecipeDetails.vue')
     },
     {
       path: '/:catchAll(.*)',
