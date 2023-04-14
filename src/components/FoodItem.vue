@@ -1,5 +1,5 @@
 <template>
-  <div class="aspect-square" v-for="(item, index) in foodItems" :key="index">
+  <div class="" v-for="(item, index) in foodItems" :key="index">
     <img
       v-lazy="item.recipe.image"
       class="w-32 aspect-square rounded-full object-center m-auto z-[1]"
@@ -7,7 +7,9 @@
     />
     <div class="border rounded-3xl -mt-14 pt-16 pb-4 px-5 space-y-2">
       <router-link to="/recipe-details" @click="getRecipeDetails(item.recipe)">
-        <h3 class="font-semibold line-clamp-1">{{ item.recipe.label }}</h3>
+        <h3 class="font-semibold line-clamp-1 text-center">
+          {{ item.recipe.label }}
+        </h3>
       </router-link>
       <div
         class="flex justify-between border- py-1 border-green-100 text-gray-500 text-sm"
@@ -34,8 +36,8 @@
             @click="isFavoriteRecipe(item.recipe)"
             class="cursor-pointer"
             :class="{
-              'fi fi-sr-heart': isFavorite(item.recipe.label),
-              'fi fi-rs-heart': !isFavorite(item.recipe.label),
+              'fi fi-sr-heart text-red-500': isFavorite(item.recipe.label),
+              'fi fi-rs-heart ': !isFavorite(item.recipe.label),
             }"
           ></i>
           <!-- <i class="fi fi-rr-shopping-cart cursor-pointer"></i> -->

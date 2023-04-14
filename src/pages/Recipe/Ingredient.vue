@@ -1,5 +1,5 @@
 <template>
-  <div class="aspect-square" v-for="(item, index) in ingredients" :key="index">
+  <div  v-for="(item, index) in ingredients" :key="index">
     <img
       v-lazy="item.image"
       class="w-20 aspect-square rounded-full object-center m-auto z-[1]"

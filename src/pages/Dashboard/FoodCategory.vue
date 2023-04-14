@@ -8,7 +8,7 @@
       @click="$emit('food-category', item.label), categoryIndex(index)"
     >
       <img class="w-14 m-auto" :src="item.src" alt="" />
-      <p class="mt-2 text-center">{{ item.label }}</p>
+      <p class="mt-2 text-center line-clamp-1">{{ item.label }}</p>
     </div>
   </div>
 </template>

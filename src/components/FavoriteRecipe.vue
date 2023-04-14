@@ -7,7 +7,7 @@
         <h2 class="text-xl font-semibold">Favorite</h2>
       </div>
     </nav>
-    <div v-if="favoriteRecipe.length > 0">
+    <div v-if="favoriteRecipe.length > 0" class="space-y-1">
       <div v-for="item in favoriteRecipe.slice(0, 7)" :key="item">
         <div class="flex gap-2 items-center">
           <img class="w-12 rounded-xl" v-lazy="item.image" alt="" />
