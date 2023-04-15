@@ -15,13 +15,13 @@
 <script setup>
 import { ref } from "vue";
 const category = ref([
-  { label: "Indian", src: "src/images/india.png", active: true },
-  { label: "Russian", src: "src/images/russia.png", active: false },
-  { label: "Chinese", src: "src/images/china.png", active: false },
-  { label: "American", src: "src/images/abc.png", active: false },
-  { label: "Italian", src: "src/images/italy.png", active: false },
-  { label: "Japanese", src: "src/images/japan.png", active: false },
-  { label: "Canadian", src: "src/images/canada.png", active: false },
+  { label: "Indian", src: "/src/images/india.png", active: true },
+  { label: "Russian", src: "/src/images/russia.png", active: false },
+  { label: "Chinese", src: "/src/images/china.png", active: false },
+  { label: "American", src: "/src/images/abc.png", active: false },
+  { label: "Italian", src: "/src/images/italy.png", active: false },
+  { label: "Japanese", src: "/src/images/japan.png", active: false },
+  { label: "Canadian", src: "/src/images/canada.png", active: false },
 ]);
 const mealIndex = ref(0);
 const itemIndex = (index) => {

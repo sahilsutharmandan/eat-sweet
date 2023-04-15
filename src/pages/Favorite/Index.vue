@@ -12,7 +12,7 @@
       </div>
     </div>
     <div v-else class="m-auto text-center flex-1 space-y-3">
-      <img class="w-1/5 m-auto" src="src\images\no-favorite.png" alt="" />
+      <img class="w-1/5 m-auto" src="/src/images/no-favorite.png" alt="" />
       <h1 class="text-4xl font-bold">No Favorite Recipe</h1>
       <p class="w-5/6 m-auto">
         Looks like you haven't added any favorite recipe yet. Go ahead and

@@ -140,7 +140,7 @@
               <span class="sr-only">Open user menu</span>
               <img
                 class="h-8 w-8 rounded-full bg-gray-50"
-                src="src\images\user-logo.png"
+                src="/src/images/user-logo.png"
                 alt=""
               />
               <span class="hidden lg:flex lg:items-center">
