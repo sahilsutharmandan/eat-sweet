@@ -1,7 +1,7 @@
 <template>
   <FullPageLayout @search-recipe="searchRecipe" :searchPanelVisible="true">
     <div
-      class="md:flex gap-4"
+      class="md:flex gap-4 spacy-y-4 lg:space-y-0"
       v-for="(item, index) in getRecipes?.data?.hits.slice(10, 11)"
       :key="index"
     >

@@ -2,7 +2,7 @@
   <div class="p-6 w-32 hidden md:flex items-center flex-col">
     <h1 class="italic antialiased tracking-wide mb-8">
       <span class="text-gray-800 font-bold">eat</span>
-      <span class="text-green-800 font-bold">dish</span>
+      <span class="text-green-800 font-bold">sweet</span>
       <i class="fi fi-rr-leaf text-xs ml-0.5 text-green-800"></i>
     </h1>
     <ul class="m-2" v-for="(item, index) in navigation" :key="index">

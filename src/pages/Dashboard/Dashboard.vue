@@ -2,7 +2,7 @@
   <FullPageLayout @search-recipe="searchRecipe">
     <div class="space-y-3">
       <main class="space-y-4">
-        <div class="lg:flex gap-4">
+        <div class="lg:flex gap-4 space-y-4 lg:space-y-0">
           <div class="lg:w-3/4 space-y-5">
             <FoodCategory @food-category="getFoodByCategory" />
             <div>

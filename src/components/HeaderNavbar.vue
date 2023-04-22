@@ -57,7 +57,7 @@
                 <div class="flex h-16 shrink-0 items-center">
                   <h1 class="italic antialiased tracking-wide text-xl">
                     <span class="text-gray-800 font-bold">eat</span>
-                    <span class="text-green-800 font-bold">dish</span>
+                    <span class="text-green-800 font-bold">sweet</span>
                     <i class="fi fi-rr-leaf text-xs ml-0.5 text-green-800"></i>
                   </h1>
                 </div>
