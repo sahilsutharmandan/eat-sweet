@@ -15,13 +15,13 @@
 <script setup>
 import { ref } from "vue";
 const category = ref([
-  { label: "Vegetarian", src: "/src/images/all.png" },
-  { label: "Burgers", src: "/src/images/burger.png" },
-  { label: "Pizza", src: "/src/images/pizza.png" },
-  { label: "Fruits", src: "/src/images/fruits.png" },
-  { label: "Cakes", src: "/src/images/cupcake.png" },
-  { label: "IceCreams", src: "/src/images/icecream.png" },
-  { label: "Drinks", src: "/src/images/drinks.png" },
+  { label: "Vegetarian", src: "src/assets/images/all.png" },
+  { label: "Burgers", src: "src/assets/images/burger.png" },
+  { label: "Pizza", src: "src/assets/images/pizza.png" },
+  { label: "Fruits", src: "src/assets/images/fruits.png" },
+  { label: "Cakes", src: "src/assets/images/cupcake.png" },
+  { label: "IceCreams", src: "src/assets/images/icecream.png" },
+  { label: "Drinks", src: "src/assets/images/drinks.png" },
 ]);
 const categoryIndx = ref(0);
 const categoryIndex = (index) => {
