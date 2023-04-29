@@ -42,7 +42,7 @@
           </p>
         </div>
       </div>
-      <div class="flex-1 h-fit border rounded-2xl p-5 pt-4">
+      <div class="flex-1 h-fit border rounded-2xl p-5 pt-4 mt-5 md:mt-0">
         <h3 class="text-xl font-semibold pb-1">Nutrients</h3>
         <ul class="pl-4 list-disc">
           <li
