@@ -1,5 +1,5 @@
 <template>
-  <div class="" v-for="(item, index) in foodItems" :key="index">
+  <div class="relative" v-for="(item, index) in foodItems" :key="index">
     <img
       v-lazy="item.recipe.image"
       class="w-32 aspect-square rounded-full object-center m-auto z-[1]"
@@ -44,6 +44,7 @@
         </span>
       </div>
     </div>
+    <Loader v-if="loading" />
   </div>
 </template>
 <script setup>
@@ -58,6 +59,9 @@ const isFavoriteRecipe = (favRecipe) => {
 };
 const favoriteRecipe = computed(() => {
   return store.getters["FoodRecipeModule/favoriteRecipe"];
+});
+const loading = computed(() => {
+  return store.getters["FoodRecipeModule/loading"];
 });
 
 function isFavorite(item) {

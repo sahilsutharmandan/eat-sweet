@@ -5,7 +5,8 @@ export default {
         return {
             recipe: [],
             favoriteRecipe: [],
-            recipeDetails: []
+            recipeDetails: [],
+            loading: true
         }
     },
     mutations: {
@@ -23,15 +24,21 @@ export default {
         GET_RECIPE_DETAILS(state, recipe) {
             state.recipeDetails = recipe
             console.log(recipe)
+        },
+        SET_LOADING(state, loading) {
+            state.loading = loading
         }
     },
     actions: {
-        async getRecipe(context, searchBy) {
+        async getRecipe({ commit }, searchBy) {
             try {
-                const response = await axios.get(`https://api.edamam.com/search?app_id=2bc600a3&app_key=1de47a2f471a653f2819b0d80a56f9f9&from=10&to=50&q=${searchBy}`)
-                context.commit('GET_RECIPE', response)
+                commit('SET_LOADING', true);
+                const response = await axios.get(`https://api.edamam.com/search?app_id=2bc600a3&app_key=1de47a2f471a653f2819b0d80a56f9f9&from=10&to=50&q=${searchBy}`);
+                commit('GET_RECIPE', response);
             } catch (error) {
-                console.log(error)
+                console.log(error);
+            } finally {
+                commit('SET_LOADING', false);
             }
         },
         isFavoriteRecipe(context, favoriteRecipe) {
@@ -52,6 +59,9 @@ export default {
         },
         recipeDetails(state) {
             return state.recipeDetails
+        },
+        loading(state) {
+            return state.loading
         }
 
     }

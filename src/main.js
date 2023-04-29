@@ -8,6 +8,7 @@ import DropDown from './components/DropDown.vue'
 import HeaderNavbar from './components/HeaderNavbar.vue'
 import FoodItem from './components/FoodItem.vue'
 import FavoriteRecipe from './components/FavoriteRecipe.vue'
+import Loader from './components/Loader.vue'
 import PrimeVue from 'primevue/config';
 import VueLazyload from 'vue-lazyload'
 import Badge from 'primevue/badge';
@@ -30,6 +31,7 @@ app.component('DropDown', DropDown)
 app.component('HeaderNavbar', HeaderNavbar)
 app.component('FoodItem', FoodItem)
 app.component('FavoriteRecipe', FavoriteRecipe)
+app.component('Loader', Loader)
 
 app.directive('badge', BadgeDirective);
 app.mount('#app')

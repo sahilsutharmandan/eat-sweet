@@ -1,7 +1,7 @@
 <template>
   <div class="grid grid-cols-3 md:grid-cols-7 gap-4">
     <div
-      class="p-5 rounded-3xl hover:bg-white box-shadow duration-200 ease-linear"
+      class="p-5 rounded-3xl hover:bg-white box-shadow duration-200 ease-linear relative"
       :class="index === categoryIndx ? 'shadows bg-white' : 'bg-green-50'"
       v-for="(item, index) in category"
       :key="index"
