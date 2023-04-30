@@ -4,7 +4,7 @@
     style="translate: -50% -50%"
   >
     <img
-      src="src/images/loader.gif"
+      src="/src/images/loader.gif"
       alt="loading"
       class="w-[60%] aspect-square"
     />

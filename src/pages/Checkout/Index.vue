@@ -1,5 +1,6 @@
 <template>
   <FullPageLayout class="flex">
+    <MultiselectDropdown class="w-52" />
     <div class="m-auto text-center flex-1 space-y-3">
       <img class="w-1/2 lg:w-1/5 m-auto" src="/src/images/chef.png" alt="" />
       <h1 class="text-2xl lg:text-4xl font-bold">Coming Soon</h1>
