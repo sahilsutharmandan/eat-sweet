@@ -1,8 +1,8 @@
-# foody
+# eatsweet
 
-This template should help get you started developing with Vue 3 in Vite.
+The primary reason for creating this app is to assess my knowledge of Vue.js and to integrate APIs with tailwindcss.
 
-# app design
+# app design references
 
 https://dribbble.com/shots/16612169-Healthy-Food-Planner/attachments/11641014?mode=media
 
@@ -14,6 +14,7 @@ https://dribbble.com/shots/14731392-Food-Application-UI
 
 https://www.themealdb.com/api.php
 
-# foody
+# eatsweet running cmd
 
-# foody-project
+npm install
+npm run dev
