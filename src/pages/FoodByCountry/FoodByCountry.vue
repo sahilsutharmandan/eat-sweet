@@ -14,14 +14,21 @@
 </template>
 <script setup>
 import { ref } from "vue";
+import Indian from "@/assets/images/india.png";
+import Russian from "@/assets/images/russia.png";
+import Chinese from "@/assets/images/china.png";
+import American from "@/assets/images/abc.png";
+import Italian from "@/assets/images/italy.png";
+import Japanese from "@/assets/images/japan.png";
+import Canadian from "@/assets/images/canada.png";
 const category = ref([
-  { label: "Indian", src: "src/assets/images/india.png", active: true },
-  { label: "Russian", src: "src/assets/images/russia.png", active: false },
-  { label: "Chinese", src: "src/assets/images/china.png", active: false },
-  { label: "American", src: "src/assets/images/abc.png", active: false },
-  { label: "Italian", src: "src/assets/images/italy.png", active: false },
-  { label: "Japanese", src: "src/assets/images/japan.png", active: false },
-  { label: "Canadian", src: "src/assets/images/canada.png", active: false },
+  { label: "Indian", src: Indian, active: true },
+  { label: "Russian", src: Russian, active: false },
+  { label: "Chinese", src: Chinese, active: false },
+  { label: "American", src: American, active: false },
+  { label: "Italian", src: Italian, active: false },
+  { label: "Japanese", src: Japanese, active: false },
+  { label: "Canadian", src: Canadian, active: false },
 ]);
 const mealIndex = ref(0);
 const itemIndex = (index) => {
