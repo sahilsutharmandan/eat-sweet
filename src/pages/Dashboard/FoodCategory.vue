@@ -14,14 +14,21 @@
 </template>
 <script setup>
 import { ref } from "vue";
+import allImg from "@/assets/images/all.png";
+import burgerImg from "@/assets/images/burger.png";
+import pizzaImg from "@/assets/images/pizza.png";
+import fruitsImg from "@/assets/images/fruits.png";
+import cupcakeImg from "@/assets/images/cupcake.png";
+import icecreamImg from "@/assets/images/icecream.png";
+import drinksImg from "@/assets/images/drinks.png";
 const category = ref([
-  { label: "Vegetarian", src: "src/assets/images/all.png" },
-  { label: "Burgers", src: "src/assets/images/burger.png" },
-  { label: "Pizza", src: "src/assets/images/pizza.png" },
-  { label: "Fruits", src: "src/assets/images/fruits.png" },
-  { label: "Cakes", src: "src/assets/images/cupcake.png" },
-  { label: "IceCreams", src: "src/assets/images/icecream.png" },
-  { label: "Drinks", src: "src/assets/images/drinks.png" },
+  { label: "Vegetarian", src: allImg },
+  { label: "Burgers", src: burgerImg },
+  { label: "Pizza", src: pizzaImg },
+  { label: "Fruits", src: fruitsImg },
+  { label: "Cakes", src: cupcakeImg },
+  { label: "IceCreams", src: icecreamImg },
+  { label: "Drinks", src: drinksImg },
 ]);
 const categoryIndx = ref(0);
 const categoryIndex = (index) => {
