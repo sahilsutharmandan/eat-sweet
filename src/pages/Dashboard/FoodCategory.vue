@@ -1,15 +1,17 @@
 <template>
   <div class="grid grid-cols-3 md:grid-cols-7 gap-4">
-    <div
-      class="p-5 rounded-3xl hover:bg-white box-shadow duration-200 ease-linear relative"
+    <button
+      type="button"
+      :aria-pressed="index === categoryIndx"
+      class="min-w-0 px-2 py-5 rounded-3xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-800 hover:bg-white box-shadow duration-200 ease-linear relative"
       :class="index === categoryIndx ? 'shadows bg-white' : 'bg-green-50'"
       v-for="(item, index) in category"
       :key="index"
       @click="$emit('food-category', item.label), categoryIndex(index)"
     >
       <img class="w-14 m-auto" :src="item.src" alt="" />
-      <p class="mt-2 text-center line-clamp-1">{{ item.label }}</p>
-    </div>
+      <span class="block mt-2 text-center break-words">{{ item.label }}</span>
+    </button>
   </div>
 </template>
 <script setup>

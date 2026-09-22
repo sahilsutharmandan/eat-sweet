@@ -69,15 +69,14 @@
                           <router-link
                             :to="item.url"
                             :class="[
-                              item.current
-                                ? 'bg-gray-50 text-indigo-600'
+                              route.path === item.url
+                                ? 'bg-green-900/10 text-green-900'
                                 : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50',
                               'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold',
                             ]"
                           >
                             <i
-                              :class="item.icon"
-                              class="text-gray-400 group-hover:text-indigo-600"
+                              :class="[item.icon, route.path === item.url ? 'text-green-900' : 'text-gray-400 group-hover:text-indigo-600']"
                             ></i>
                             {{ item.name }}
                           </router-link>
@@ -191,6 +190,9 @@
 
 <script setup>
 import { ref } from "vue";
+import { useRoute } from "vue-router";
+
+const route = useRoute();
 import {
   Dialog,
   DialogPanel,
@@ -220,38 +222,32 @@ const navigation = ref([
     name: "Dashboard",
     icon: "fi-sr-home",
     url: "/",
-    active: "/" === window.location.pathname,
   },
   {
     name: "Country",
     icon: "fi fi-rr-flag",
     url: "/by-country",
-    active: "/by-country" === window.location.pathname,
   },
   {
     name: "Recipe",
     icon: "fi fi-sr-restaurant",
     url: "/recipe",
-    active: "/recipe" === window.location.pathname,
   },
   {
     name: "Products",
     icon: "fi fi-sr-hamburger-soda",
     url: "/products",
-    active: "/products" === window.location.pathname,
   },
   {
     name: "Favorite",
     icon: "fi-sr-heart ",
     url: "/favorite",
-    active: "/favorite" === window.location.pathname,
   },
 
   {
     name: "Checkout",
     icon: "fi-sr-sack-dollar",
     url: "/checkout",
-    active: "/checkout" === window.location.pathname,
   },
   // { name: "Chat", icon: "fi-ss-comments", url: "", active: false },
   // { name: "Shop", icon: "fi-ss-shop", url: "", active: false },
