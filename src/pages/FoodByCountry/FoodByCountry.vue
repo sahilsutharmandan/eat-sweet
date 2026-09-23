@@ -1,14 +1,14 @@
 <template>
   <div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4">
     <div
-      class="p-5 rounded-3xl hover:bg-white box-shadow duration-200 ease-linear"
+      class="country-tab py-5 px-2 rounded-3xl hover:bg-white box-shadow duration-200 ease-linear"
       :class="mealIndex === index ? 'shadows bg-white' : 'bg-green-50'"
       v-for="(item, index) in category"
       :key="index"
       @click="$emit('get-food-by-country', item.label), itemIndex(index)"
     >
-      <img class="w-14 m-auto" :src="item.src" alt="" />
-      <p class="mt-2 text-center">{{ item.label }}</p>
+      <img class="w-14 h-14 object-contain shrink-0" :src="item.src" alt="" />
+      <p class="country-label">{{ item.label }}</p>
     </div>
   </div>
 </template>
@@ -36,6 +36,23 @@ const itemIndex = (index) => {
 };
 </script>
 <style scoped>
+.country-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-width: 0;
+  min-height: 8rem;
+}
+.country-label {
+  width: 100%;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
 .shadows {
   box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em,
     rgba(90, 125, 188, 0.05) 0px 0.25em 1em;

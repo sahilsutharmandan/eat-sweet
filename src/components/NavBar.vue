@@ -1,5 +1,5 @@
 <template>
-  <div class="p-6 w-32 hidden md:flex items-center flex-col">
+  <div class="p-6 w-32 shrink-0 bg-green-50 hidden md:flex items-center flex-col">
     <h1 class="italic antialiased tracking-wide mb-8">
       <span class="text-gray-800 font-bold">eat</span>
       <span class="text-green-800 font-bold">sweet</span>
@@ -12,7 +12,7 @@
           :class="
             item.active
               ? 'bg-green-900/10 text-green-900  '
-              : 'text-green-900/60 hover:bg-green-900/10 '
+              : 'text-green-900 hover:bg-green-900/10 '
           "
         >
           <i class="fi" :class="item.icon"></i>

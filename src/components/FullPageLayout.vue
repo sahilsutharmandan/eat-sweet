@@ -1,9 +1,9 @@
 <template>
-  <div class="backdrop-blur-sm bg-white/20 shadow rounded-xl flex">
+  <div class="backdrop-blur-sm bg-white/20 shadow flex">
     <NavBar />
     <div
-      class="bg-white flex-1 rounded-xl flex flex-col overflow-y-auto"
-      style="height: calc(100vh - 50px)"
+      class="bg-white flex-1 min-w-0 rounded-xl flex flex-col overflow-y-auto"
+      style="height: 100dvh"
     >
       <HeaderNavbar>
         <form
