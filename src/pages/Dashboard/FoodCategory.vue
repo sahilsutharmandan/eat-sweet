@@ -1,15 +1,16 @@
 <template>
-  <div class="grid grid-cols-3 md:grid-cols-7 gap-4">
-    <div
-      class="p-5 rounded-3xl hover:bg-white box-shadow duration-200 ease-linear relative"
+  <div class="grid grid-cols-3 md:grid-cols-7 gap-2.5 sm:gap-3 lg:gap-4">
+    <button
+      type="button"
+      class="w-full py-4 px-1.5 sm:py-5 sm:px-2 rounded-3xl hover:bg-white box-shadow duration-200 ease-linear relative cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-green-600 focus-visible:ring-offset-2"
       :class="index === categoryIndx ? 'shadows bg-white' : 'bg-green-50'"
       v-for="(item, index) in category"
       :key="index"
       @click="$emit('food-category', item.label), categoryIndex(index)"
     >
       <img class="w-14 m-auto" :src="item.src" alt="" />
-      <p class="mt-2 text-center line-clamp-1">{{ item.label }}</p>
-    </div>
+      <p class="mt-2 text-center text-xs lg:text-sm font-medium">{{ item.label }}</p>
+    </button>
   </div>
 </template>
 <script setup>

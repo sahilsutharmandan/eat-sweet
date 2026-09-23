@@ -68,16 +68,21 @@
                         <li v-for="item in navigation" :key="item.name">
                           <router-link
                             :to="item.url"
+                            @click="sidebarOpen = false"
                             :class="[
                               item.current
-                                ? 'bg-gray-50 text-indigo-600'
-                                : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50',
+                                ? 'bg-green-900/10 text-green-900'
+                                : 'text-gray-700 hover:text-green-900 hover:bg-green-900/10',
                               'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold',
                             ]"
                           >
                             <i
-                              :class="item.icon"
-                              class="text-gray-400 group-hover:text-indigo-600"
+                              :class="[
+                                item.current
+                                  ? 'text-green-900'
+                                  : 'text-gray-400 group-hover:text-green-900',
+                                item.icon,
+                              ]"
                             ></i>
                             {{ item.name }}
                           </router-link>
@@ -190,7 +195,8 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
+import { useRoute } from "vue-router";
 import {
   Dialog,
   DialogPanel,
@@ -215,48 +221,56 @@ import {
   ShoppingCartIcon,
 } from "@heroicons/vue/24/outline";
 import { ChevronDownIcon, MagnifyingGlassIcon } from "@heroicons/vue/20/solid";
-const navigation = ref([
-  {
-    name: "Dashboard",
-    icon: "fi-sr-home",
-    url: "/",
-    active: "/" === window.location.pathname,
-  },
-  {
-    name: "Country",
-    icon: "fi fi-rr-flag",
-    url: "/by-country",
-    active: "/by-country" === window.location.pathname,
-  },
-  {
-    name: "Recipe",
-    icon: "fi fi-sr-restaurant",
-    url: "/recipe",
-    active: "/recipe" === window.location.pathname,
-  },
-  {
-    name: "Products",
-    icon: "fi fi-sr-hamburger-soda",
-    url: "/products",
-    active: "/products" === window.location.pathname,
-  },
-  {
-    name: "Favorite",
-    icon: "fi-sr-heart ",
-    url: "/favorite",
-    active: "/favorite" === window.location.pathname,
-  },
 
-  {
-    name: "Checkout",
-    icon: "fi-sr-sack-dollar",
-    url: "/checkout",
-    active: "/checkout" === window.location.pathname,
-  },
-  // { name: "Chat", icon: "fi-ss-comments", url: "", active: false },
-  // { name: "Shop", icon: "fi-ss-shop", url: "", active: false },
-  // { name: "Setting", icon: "fi-sr-settings", url: "", active: false },
-]);
+const route = useRoute();
+
+const navigation = computed(() => {
+  const currentPath = route?.path || window.location.pathname;
+  return [
+    {
+      name: "Dashboard",
+      icon: "fi-sr-home",
+      url: "/",
+      current: currentPath === "/",
+      active: currentPath === "/",
+    },
+    {
+      name: "Country",
+      icon: "fi fi-rr-flag",
+      url: "/by-country",
+      current: currentPath === "/by-country",
+      active: currentPath === "/by-country",
+    },
+    {
+      name: "Recipe",
+      icon: "fi fi-sr-restaurant",
+      url: "/recipe",
+      current: currentPath === "/recipe",
+      active: currentPath === "/recipe",
+    },
+    {
+      name: "Products",
+      icon: "fi fi-sr-hamburger-soda",
+      url: "/products",
+      current: currentPath === "/products",
+      active: currentPath === "/products",
+    },
+    {
+      name: "Favorite",
+      icon: "fi-sr-heart ",
+      url: "/favorite",
+      current: currentPath === "/favorite",
+      active: currentPath === "/favorite",
+    },
+    {
+      name: "Checkout",
+      icon: "fi-sr-sack-dollar",
+      url: "/checkout",
+      current: currentPath === "/checkout",
+      active: currentPath === "/checkout",
+    },
+  ];
+});
 
 const userNavigation = [
   { name: "Your profile", href: "#" },

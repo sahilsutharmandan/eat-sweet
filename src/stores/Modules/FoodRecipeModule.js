@@ -33,7 +33,7 @@ export default {
         async getRecipe({ commit }, searchBy) {
             try {
                 commit('SET_LOADING', true);
-                const response = await axios.get(`https://api.edamam.com/search?app_id=2bc600a3&app_key=1de47a2f471a653f2819b0d80a56f9f9&from=10&to=50&q=${searchBy}`);
+                const response = await axios.get(`${import.meta.env.VITE_FOOD_RECIPE_API_URL}?type=public&app_id=${import.meta.env.VITE_FOOD_RECIPE_APP_ID}&app_key=${import.meta.env.VITE_FOOD_RECIPE_API_KEY}&q=${searchBy}`);
                 commit('GET_RECIPE', response);
             } catch (error) {
                 console.log(error);
