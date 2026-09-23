@@ -42,8 +42,24 @@ import { ref, computed, onMounted } from "vue";
 import ThemedDropdown from "./ThemedDropdown.vue";
 import { useStore } from "vuex";
 
+const props = defineProps({
+  modelValue: {
+    type: Object,
+    default: undefined,
+  },
+});
+const emit = defineEmits(["update:modelValue", "change"]);
+
 const store = useStore();
-const value = ref(null);
+const internalValue = ref(null);
+const value = computed({
+  get: () => (props.modelValue !== undefined ? props.modelValue : internalValue.value),
+  set: (val) => {
+    internalValue.value = val;
+    emit("update:modelValue", val);
+    emit("change", val);
+  },
+});
 const FoodCategories = ref("Vegetarian");
 const getRecipe = (category) => {
   store.dispatch("FoodRecipeModule/getRecipe", category);
