@@ -1,40 +1,45 @@
 <template>
   <div>
-    <Multiselect
+    <ThemedDropdown
       v-model="value"
       :options="getRecipes?.data?.hits"
-      label="label"
+      optionLabel="recipe.label"
+      dataKey="recipe.uri"
+      placeholder="Select a Recipe"
+      aria-label="Select a Recipe"
     >
-      <template v-slot:singlelabel="{ value }">
-        <div class="flex gap-3 items-center">
+      <template v-slot:value="{ value, placeholder }">
+        <div v-if="value" class="flex gap-3 items-center">
           <img
-            class="character-label-icon w-8 aspect-square"
-            v-lazy="value.recipe.image"
+            alt=""
+            class="character-label-icon w-8 aspect-square shrink-0"
+            :src="value.recipe.image"
           />
           <span class="line-clamp-1">
             {{ value.recipe.label }}
           </span>
         </div>
+        <span v-else>{{ placeholder }}</span>
       </template>
 
       <template v-slot:option="{ option }">
         <div class="flex gap-3 items-center">
           <img
-            class="character-option-icon w-8 aspect-square"
-            v-lazy="option.recipe.image"
+            alt=""
+            class="character-option-icon w-8 aspect-square shrink-0"
+            :src="option.recipe.image"
           />
           <span class="line-clamp-2">
             {{ option.recipe.label }}
           </span>
         </div>
       </template>
-    </Multiselect>
+    </ThemedDropdown>
   </div>
 </template>
 <script setup>
 import { ref, computed, onMounted } from "vue";
-import Multiselect from "@vueform/multiselect";
-import "@vueform/multiselect/themes/tailwind.css";
+import ThemedDropdown from "./ThemedDropdown.vue";
 import { useStore } from "vuex";
 
 const store = useStore();
