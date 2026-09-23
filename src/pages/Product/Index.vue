@@ -5,7 +5,8 @@
         <Dropdown
           v-model="selectedMealType"
           :options="mealsType"
-          optionLabel="name"
+          optionLabel="strCategory"
+          aria-label="Select a Meal Type"
           placeholder="Select a Meal Type"
           class="w-1/2"
         >
@@ -36,7 +37,8 @@
         <Dropdown
           v-model="selectedMeal"
           :options="mealsByCategory"
-          optionLabel="name"
+          optionLabel="strMeal"
+          aria-label="Select a Meal"
           placeholder="Select a Meal"
         >
           <template #value="slotProps">
@@ -112,7 +114,7 @@
 <script setup>
 import { ref, onMounted, computed, watch } from "vue";
 import { useStore } from "vuex";
-import Dropdown from "primevue/dropdown";
+import Dropdown from "../../components/ThemedDropdown.vue";
 
 const store = useStore();
 const selectedMeal = ref();
