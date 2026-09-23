@@ -18,11 +18,11 @@ import VueLazyload from 'vue-lazyload'
 import Badge from 'primevue/badge';
 import BadgeDirective from 'primevue/badgedirective';
 
-import './assets/main.css'
 import '@flaticon/flaticon-uicons/css/all/all.css';
 import 'primeicons/primeicons.css';
 import "primevue/resources/primevue.min.css";
 import "primevue/resources/themes/lara-light-indigo/theme.css";
+import './assets/main.css'
 
 const app = createApp(App)
 

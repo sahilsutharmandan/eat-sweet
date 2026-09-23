@@ -4,17 +4,75 @@
 /* Dropdown css here  */
 
 .p-dropdown {
-  @apply border w-full rounded-md;
+  @apply border border-gray-300 w-full rounded-md bg-white transition duration-150;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 }
+
+.p-dropdown:not(.p-disabled):hover {
+  border-color: #22c55e !important;
+}
+
+.p-dropdown:not(.p-disabled).p-focus,
+.p-dropdown:not(.p-disabled).p-inputwrapper-focus,
+.p-dropdown:not(.p-disabled).p-overlay-open {
+  outline: 0 none !important;
+  outline-offset: 0 !important;
+  border-color: #22c55e !important;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.3) !important;
+}
+
+.p-dropdown .p-dropdown-label {
+  @apply text-base text-gray-800 py-2 px-3 outline-none;
+}
+
+.p-dropdown .p-dropdown-label.p-placeholder {
+  @apply text-gray-400;
+}
+
+.p-dropdown .p-dropdown-trigger {
+  @apply flex items-center justify-center text-gray-500 pr-2;
+  width: 2.25rem;
+}
+
+.p-dropdown .p-dropdown-trigger-icon {
+  font-size: 0.75rem;
+  color: #6b7280;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.p-dropdown.p-overlay-open .p-dropdown-trigger-icon {
+  transform: rotate(180deg);
+  color: #16a34a;
+}
+
 .p-dropdown-panel {
-  @apply bg-white rounded-md;
+  @apply bg-white rounded-md border border-gray-200 shadow-lg overflow-hidden;
+  margin-top: 2px;
 }
-.p-dropdown-item {
-  @apply py-1 hover:bg-gray-200 px-1;
+
+.p-dropdown-panel .p-dropdown-items {
+  @apply p-1;
 }
-.p-dropdown-label {
-  @apply outline-none;
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+  @apply py-2 px-3 rounded text-gray-700 transition-colors duration-150 cursor-pointer;
 }
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item:not(.p-highlight):not(.p-disabled):hover {
+  @apply bg-gray-100 text-gray-900;
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
+  background: #22c55e !important;
+  color: #ffffff !important;
+  font-weight: 500;
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight:hover {
+  background: #16a34a !important;
+  color: #ffffff !important;
+}
+
 .p-hidden-accessible {
   @apply hidden;
 }

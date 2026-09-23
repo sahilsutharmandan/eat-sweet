@@ -5,6 +5,7 @@
     :placeholder="placeholder"
     v-model="selectedOption"
     class="w-full"
+    dropdownIcon="pi pi-caret-down"
     @change="emitSelectedOption"
   >
     <template #value="slotProps">

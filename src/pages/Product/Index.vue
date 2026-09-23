@@ -7,14 +7,15 @@
           :options="mealsType"
           optionLabel="name"
           placeholder="Select a Meal Type"
+          dropdownIcon="pi pi-caret-down"
           class="w-1/2"
         >
           <template #value="slotProps">
-            <div v-if="slotProps.value" class="flex align-items-center">
+            <div v-if="slotProps.value" class="flex items-center">
               <img
                 :alt="slotProps.value.strCategory"
-                v-lazy="slotProps.value.strCategoryThumb"
-                class="mr-2 w-6 aspect-square shrink-0"
+                :src="slotProps.value.strCategoryThumb"
+                class="mr-2 w-6 h-6 object-cover rounded-sm shrink-0"
               />
               <div>{{ slotProps.value.strCategory }}</div>
             </div>
@@ -23,11 +24,11 @@
             </span>
           </template>
           <template #option="slotProps">
-            <div class="flex align-items-center">
+            <div class="flex items-center">
               <img
                 :alt="slotProps.option.strCategory"
-                v-lazy="slotProps.option.strCategoryThumb"
-                class="mr-2 w-6 aspect-square shrink-0"
+                :src="slotProps.option.strCategoryThumb"
+                class="mr-2 w-6 h-6 object-cover rounded-sm shrink-0"
               />
               <div>{{ slotProps.option.strCategory }}</div>
             </div>
@@ -38,13 +39,14 @@
           :options="mealsByCategory"
           optionLabel="name"
           placeholder="Select a Meal"
+          dropdownIcon="pi pi-caret-down"
         >
           <template #value="slotProps">
-            <div v-if="slotProps.value" class="flex align-items-center">
+            <div v-if="slotProps.value" class="flex items-center">
               <img
                 :alt="slotProps.value.strMeal"
-                v-lazy="slotProps.value.strMealThumb"
-                class="mr-2 w-6 aspect-square shrink-0"
+                :src="slotProps.value.strMealThumb"
+                class="mr-2 w-6 h-6 object-cover rounded-sm shrink-0"
               />
               <div>{{ slotProps.value.strMeal }}</div>
             </div>
@@ -53,11 +55,11 @@
             </span>
           </template>
           <template #option="slotProps">
-            <div class="flex align-items-center max-w-sm">
+            <div class="flex items-center max-w-sm">
               <img
                 :alt="slotProps.option.strMeal"
-                v-lazy="slotProps.option.strMealThumb"
-                class="mr-2 w-6 aspect-square shrink-0"
+                :src="slotProps.option.strMealThumb"
+                class="mr-2 w-6 h-6 object-cover rounded-sm shrink-0"
               />
               <div class="line-clamp-1">{{ slotProps.option.strMeal }}</div>
             </div>

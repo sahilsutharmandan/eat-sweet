@@ -2,8 +2,12 @@
   <div>
     <Multiselect
       v-model="value"
-      :options="getRecipes?.data?.hits"
+      :options="recipeOptions"
+      :object="true"
+      valueProp="value"
       label="label"
+      trackBy="label"
+      placeholder="Select a Recipe"
     >
       <template v-slot:singlelabel="{ value }">
         <div class="flex gap-3 items-center">
@@ -45,6 +49,14 @@ const getRecipe = (category) => {
 };
 const getRecipes = computed(() => {
   return store.getters["FoodRecipeModule/getRecipe"];
+});
+const recipeOptions = computed(() => {
+  const hits = getRecipes.value?.data?.hits || [];
+  return hits.map((hit, index) => ({
+    ...hit,
+    value: hit.recipe.uri || `${hit.recipe.label}_${index}`,
+    label: hit.recipe.label,
+  }));
 });
 onMounted(() => {
   // getRecipes;
