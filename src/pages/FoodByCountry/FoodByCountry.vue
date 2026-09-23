@@ -1,14 +1,18 @@
 <template>
   <div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4">
     <div
-      class="p-5 rounded-3xl hover:bg-white box-shadow duration-200 ease-linear"
+      class="min-w-0 px-2 py-3.5 rounded-3xl flex flex-col items-center justify-center cursor-pointer hover:bg-white box-shadow duration-200 ease-linear"
       :class="mealIndex === index ? 'shadows bg-white' : 'bg-green-50'"
       v-for="(item, index) in category"
       :key="index"
       @click="$emit('get-food-by-country', item.label), itemIndex(index)"
     >
-      <img class="w-14 m-auto" :src="item.src" alt="" />
-      <p class="mt-2 text-center">{{ item.label }}</p>
+      <div class="h-8 w-11 flex items-center justify-center m-auto">
+        <img class="max-h-full max-w-full object-contain" :src="item.src" alt="" />
+      </div>
+      <p class="mt-2 text-center text-xs font-medium text-gray-700 w-full truncate tracking-tight">
+        {{ item.label }}
+      </p>
     </div>
   </div>
 </template>
