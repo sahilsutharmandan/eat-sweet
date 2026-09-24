@@ -1,12 +1,28 @@
 import axios from "axios";
+
+function getStoredItem(key, fallback) {
+    try {
+        const item = localStorage.getItem(key);
+        return item ? JSON.parse(item) : fallback;
+    } catch (e) {
+        return fallback;
+    }
+}
+
+function setStoredItem(key, val) {
+    try {
+        localStorage.setItem(key, JSON.stringify(val));
+    } catch (e) {}
+}
+
 export default {
     namespaced: true,
     state() {
         return {
             recipe: [],
-            favoriteRecipe: [],
-            recipeDetails: [],
-            loading: true
+            favoriteRecipe: getStoredItem('favoriteRecipe', []),
+            recipeDetails: getStoredItem('recipeDetails', null) || {},
+            loading: false
         }
     },
     mutations: {
@@ -20,10 +36,13 @@ export default {
             } else {
                 state.favoriteRecipe = state.favoriteRecipe.filter(item => item.label !== recipe.label);
             }
+            setStoredItem('favoriteRecipe', state.favoriteRecipe);
         },
         GET_RECIPE_DETAILS(state, recipe) {
             state.recipeDetails = recipe
-            console.log(recipe)
+            if (recipe && Object.keys(recipe).length > 0) {
+                setStoredItem('recipeDetails', recipe);
+            }
         },
         SET_LOADING(state, loading) {
             state.loading = loading
@@ -33,8 +52,9 @@ export default {
         async getRecipe({ commit }, searchBy) {
             try {
                 commit('SET_LOADING', true);
-                const response = await axios.get(`${import.meta.env.VITE_FOOD_RECIPE_API_URL}?type=public&app_id=${import.meta.env.VITE_FOOD_RECIPE_APP_ID}&app_key=${import.meta.env.VITE_FOOD_RECIPE_API_KEY}&q=${searchBy}`);
+                const response = await axios.get(`${import.meta.env.VITE_FOOD_RECIPE_API_URL}?type=public&app_id=${import.meta.env.VITE_FOOD_RECIPE_APP_ID}&app_key=${import.meta.env.VITE_FOOD_RECIPE_API_KEY}&q=${encodeURIComponent(searchBy || '')}`);
                 commit('GET_RECIPE', response);
+                return response;
             } catch (error) {
                 console.log(error);
             } finally {

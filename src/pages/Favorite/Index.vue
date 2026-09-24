@@ -7,7 +7,7 @@
           <i class="fi fi-rr-settings-sliders mt-1.5"></i>
         </div>
       </nav>
-      <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         <favoriteItem :foodItems="favoriteRecipe" />
       </div>
     </div>
