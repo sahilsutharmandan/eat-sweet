@@ -43,7 +43,12 @@ import ThemedDropdown from "./ThemedDropdown.vue";
 import { useStore } from "vuex";
 
 const store = useStore();
-const value = ref(null);
+const props = defineProps({ modelValue: { type: Object, default: null } });
+const emit = defineEmits(["update:modelValue"]);
+const value = computed({
+  get: () => props.modelValue,
+  set: (selection) => emit("update:modelValue", selection),
+});
 const FoodCategories = ref("Vegetarian");
 const getRecipe = (category) => {
   store.dispatch("FoodRecipeModule/getRecipe", category);
