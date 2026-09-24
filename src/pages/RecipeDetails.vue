@@ -1,12 +1,18 @@
 <template>
   <FullPageLayout @search-recipe="searchRecipe" :searchPanelVisible="true">
-    <div class="md:flex gap-4">
+    <p v-if="loading" role="status">Loading recipe…</p>
+    <div v-else-if="error" role="alert">
+      <p>{{ error }}</p>
+      <button v-if="route.query.id" class="text-green-700 underline" @click="loadRecipe">Try again</button>
+      <router-link class="block text-green-700 underline" to="/recipe">Search recipes</router-link>
+    </div>
+    <div v-else-if="recipeDetails" class="md:flex gap-4">
       <div class="md:w-3/4 lg:flex gap-6">
         <div class="lg:w-1/3 h-full">
-          <img class="h-96 object-cover" v-lazy="recipeDetails.image" alt="" />
+          <img v-if="recipeDetails.image" class="h-96 object-cover" :src="recipeDetails.image" alt="" />
         </div>
         <div class="lg:w-2/3">
-          <p>{{ recipeDetails.mealType[0] }}</p>
+          <p>{{ recipeDetails.mealType?.[0] }}</p>
           <h2 class="text-3xl font-semibold">{{ recipeDetails.label }}</h2>
           <div class="space-y-1">
             <p
@@ -33,9 +39,9 @@
           >
             Ingredient
           </p>
-          <p class="grid grid-cols-3 gap-3">
+          <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3">
             <Ingredient :ingredients="recipeDetails.ingredients" />
-          </p>
+          </div>
         </div>
       </div>
       <div class="flex-1 h-fit border rounded-2xl p-5 pt-4">
@@ -58,18 +64,43 @@
   </FullPageLayout>
 </template>
 <script setup>
-import { ref, onMounted, computed, watch } from "vue";
+import { ref, watch } from "vue";
 import { useStore } from "vuex";
+import { useRoute } from "vue-router";
+import { recipeId } from "@/utils/recipeLink";
 import Ingredient from "./Recipe/Ingredient.vue";
 const store = useStore();
-const searchFoodRecipe = ref();
-const recipeDetails = computed(() => {
-  return store.getters["FoodRecipeModule/recipeDetails"];
-});
-const searchRecipe = (value) => {
-  searchFoodRecipe.value = value;
-};
-watch(searchFoodRecipe, (newVal) => {
-  getRecipe(newVal);
-});
+const route = useRoute();
+const recipeDetails = ref(null);
+const loading = ref(false);
+const error = ref("");
+let request = 0;
+async function loadRecipe() {
+  const current = ++request;
+  const id = route.query.id;
+  recipeDetails.value = null;
+  error.value = "";
+  loading.value = false;
+  if (typeof id !== 'string' || !/^[a-zA-Z0-9_-]+$/.test(id)) {
+    error.value = "Choose a recipe to view its details.";
+    return;
+  }
+  const selected = store.getters["FoodRecipeModule/recipeDetails"];
+  if (recipeId(selected) === id) {
+    recipeDetails.value = selected;
+    return;
+  }
+  loading.value = true;
+  try {
+    const recipe = await store.dispatch("FoodRecipeModule/loadRecipeDetails", id);
+    if (!recipe || recipeId(recipe) !== id) throw new Error('Recipe not found');
+    if (current === request) recipeDetails.value = recipe;
+  } catch {
+    if (current === request) error.value = "This recipe could not be loaded. Please try again or search for another recipe.";
+  } finally {
+    if (current === request) loading.value = false;
+  }
+}
+watch(() => route.query.id, loadRecipe, { immediate: true });
+const searchRecipe = (value) => store.dispatch("FoodRecipeModule/getRecipe", value);
 </script>

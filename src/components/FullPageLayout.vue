@@ -29,7 +29,7 @@
             v-model="searchFoodRecipe"
           />
           <div
-            class="absolute bg-white border border-t-0 rounded-b-lg px-2 py-1 w-96 top-16 max-h-[300px] overflow-y-auto"
+            class="absolute bg-white border border-t-0 rounded-b-lg px-2 py-1 w-full max-w-96 z-10 top-16 max-h-[300px] overflow-y-auto"
             :class="
               isSearchPanelVisible &&
               searchFoodRecipe !== '' &&
@@ -39,7 +39,7 @@
             "
           >
             <router-link
-              to="/recipe-details"
+              :to="recipeLink(item.recipe)"
               @click="
                 getRecipeDetails(item.recipe), (isSearchPanelVisible = false)
               "
@@ -47,7 +47,7 @@
               :key="item"
               class="flex gap-2 items-center hover:bg-gray-100 p-2 rounded-md"
             >
-              <img v-lazy="item.recipe.image" class="w-7 shrink-0" alt="" />
+              <img v-if="item.recipe.image" v-lazy="item.recipe.image" class="w-7 shrink-0" alt="" />
               <span class="flex-1 line-clamp-1">{{ item.recipe.label }}</span>
             </router-link>
           </div>
@@ -61,6 +61,7 @@
   </div>
 </template>
 <script setup>
+import { recipeLink } from "@/utils/recipeLink";
 import { ref, computed } from "vue";
 import NavBar from "./NavBar.vue";
 import { MagnifyingGlassIcon } from "@heroicons/vue/20/solid";

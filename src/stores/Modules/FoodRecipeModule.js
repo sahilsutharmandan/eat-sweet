@@ -5,7 +5,9 @@ export default {
         return {
             recipe: [],
             favoriteRecipe: [],
-            recipeDetails: [],
+            recipeDetails: null,
+            searchError: "",
+            searchRequest: 0,
             loading: true
         }
     },
@@ -23,23 +25,50 @@ export default {
         },
         GET_RECIPE_DETAILS(state, recipe) {
             state.recipeDetails = recipe
-            console.log(recipe)
+
+        },
+        SEARCH_STARTED(state) {
+            state.searchRequest++;
+            state.searchError = "";
+            state.recipe = [];
+        },
+        SEARCH_FAILED(state) {
+            state.searchError = "Unable to load recipes. Please try again.";
         },
         SET_LOADING(state, loading) {
             state.loading = loading
         }
     },
     actions: {
-        async getRecipe({ commit }, searchBy) {
+        async getRecipe({ commit, state }, searchBy) {
+            commit('SEARCH_STARTED');
+            const request = state.searchRequest;
+            commit('SET_LOADING', true);
             try {
-                commit('SET_LOADING', true);
-                const response = await axios.get(`${import.meta.env.VITE_FOOD_RECIPE_API_URL}?type=public&app_id=${import.meta.env.VITE_FOOD_RECIPE_APP_ID}&app_key=${import.meta.env.VITE_FOOD_RECIPE_API_KEY}&q=${searchBy}`);
-                commit('GET_RECIPE', response);
+                const response = await axios.get(import.meta.env.VITE_FOOD_RECIPE_API_URL, {
+                    params: {
+                        type: 'public',
+                        app_id: import.meta.env.VITE_FOOD_RECIPE_APP_ID,
+                        app_key: import.meta.env.VITE_FOOD_RECIPE_API_KEY,
+                        q: String(searchBy || '').trim() || 'Vegetarian'
+                    }
+                });
+                if (request === state.searchRequest) commit('GET_RECIPE', response);
             } catch (error) {
-                console.log(error);
+                if (request === state.searchRequest) commit('SEARCH_FAILED');
             } finally {
-                commit('SET_LOADING', false);
+                if (request === state.searchRequest) commit('SET_LOADING', false);
             }
+        },
+        async loadRecipeDetails(_, id) {
+            const response = await axios.get(`${import.meta.env.VITE_FOOD_RECIPE_API_URL}/${encodeURIComponent(id)}`, {
+                params: {
+                    type: 'public',
+                    app_id: import.meta.env.VITE_FOOD_RECIPE_APP_ID,
+                    app_key: import.meta.env.VITE_FOOD_RECIPE_API_KEY
+                }
+            });
+            return response.data.recipe;
         },
         isFavoriteRecipe(context, favoriteRecipe) {
             context.commit('FAVORITE_RECIPE', favoriteRecipe)

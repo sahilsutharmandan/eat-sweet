@@ -1,16 +1,16 @@
 <template>
-  <div v-for="(item, index) in foodItems" :key="index">
+  <div class="min-w-0" v-for="(item, index) in foodItems" :key="index">
     <img
       v-lazy="item.image"
-      class="w-32 aspect-square rounded-full object-center m-auto z-[1]"
+      class="w-32 max-w-full aspect-square rounded-full object-center m-auto z-[1]"
       alt=""
     />
     <div class="border rounded-3xl -mt-14 pt-16 pb-4 px-5 space-y-2">
-      <router-link to="/recipe-details" @click="getRecipeDetails(item)">
+      <router-link :to="recipeLink(item)" @click="getRecipeDetails(item)">
         <h3 class="font-semibold line-clamp-1">{{ item.label }}</h3>
       </router-link>
       <div
-        class="flex justify-between border- py-1 border-green-100 text-gray-500 text-sm"
+        class="card-metadata py-1 text-gray-500 text-sm"
       >
         <p>
           <span class="text-green-500 pr-1">{{
@@ -18,7 +18,6 @@
           }}</span
           ><span>CALORIES</span>
         </p>
-        |
         <p>
           <span class="text-green-500 pr-1">{{ item.ingredients.length }}</span
           ><span>INGREDIENTS</span>
@@ -43,6 +42,7 @@
   </div>
 </template>
 <script setup>
+import { recipeLink } from "@/utils/recipeLink";
 import { ref, watch, computed } from "vue";
 import { useStore } from "vuex";
 const props = defineProps({
@@ -63,3 +63,17 @@ const getRecipeDetails = (recipe) => {
   store.dispatch("FoodRecipeModule/getRecipeDetails", recipe);
 };
 </script>
+
+<style scoped>
+.card-metadata {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.25rem 0.75rem;
+  overflow-wrap: anywhere;
+}
+.card-metadata p {
+  min-width: 0;
+  flex-wrap: wrap;
+}
+</style>

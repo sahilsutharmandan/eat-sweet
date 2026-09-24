@@ -6,7 +6,7 @@
       alt=""
     />
     <div class="recipe-card-body border rounded-3xl -mt-14 pt-16 pb-4 px-5 space-y-2">
-      <router-link to="/recipe-details" @click="getRecipeDetails(item.recipe)">
+      <router-link :to="recipeLink(item.recipe)" @click="getRecipeDetails(item.recipe)">
         <h3 class="font-semibold line-clamp-1 text-center">
           {{ item.recipe.label }}
         </h3>
@@ -47,6 +47,7 @@
   </div>
 </template>
 <script setup>
+import { recipeLink } from "@/utils/recipeLink";
 import { ref, watch, computed } from "vue";
 import { useStore } from "vuex";
 const props = defineProps({
