@@ -1,5 +1,6 @@
 <template>
-  <FullPageLayout @search-recipe="searchRecipe" :searchPanelVisible="true">
+  <FullPageLayout @search-recipe="searchRecipe">
+    <p v-if="searchFoodRecipe" role="status" class="text-sm text-gray-500 mb-4">Filtering ingredients and nutrients. Clear search to show all.</p>
     <div class="md:flex gap-4">
       <div class="md:w-3/4 lg:flex gap-6">
         <div class="lg:w-1/3 h-full">
@@ -34,7 +35,7 @@
             Ingredient
           </p>
           <p class="grid grid-cols-3 gap-3">
-            <Ingredient :ingredients="recipeDetails.ingredients" />
+            <Ingredient :ingredients="filterItems(recipeDetails.ingredients)" />
           </p>
         </div>
       </div>
@@ -43,7 +44,7 @@
         <ul class="pl-4 list-disc">
           <li
             class="flex gap-1 justify-between"
-            v-for="item in recipeDetails.totalNutrients"
+            v-for="item in filterItems(Object.values(recipeDetails.totalNutrients || {}))"
             :key="item"
           >
             <span>{{ item.label }}</span>
@@ -58,18 +59,16 @@
   </FullPageLayout>
 </template>
 <script setup>
+import { usePageFilter } from '@/composables/usePageFilter';
+const { searchFoodRecipe, searchRecipe, filterItems } = usePageFilter();
 import { ref, onMounted, computed, watch } from "vue";
 import { useStore } from "vuex";
 import Ingredient from "./Recipe/Ingredient.vue";
 const store = useStore();
-const searchFoodRecipe = ref();
+
 const recipeDetails = computed(() => {
   return store.getters["FoodRecipeModule/recipeDetails"];
 });
-const searchRecipe = (value) => {
-  searchFoodRecipe.value = value;
-};
-watch(searchFoodRecipe, (newVal) => {
-  getRecipe(newVal);
-});
+
+
 </script>

@@ -12,25 +12,28 @@
                   <i class="fi fi-rr-settings-sliders mt-1.5"></i>
                 </div>
               </nav>
+              <p v-if="searchFoodRecipe" role="status" class="text-sm text-gray-500 mb-4">{{ filterItems(getRecipes?.data?.hits).length }} matching recipes</p>
               <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <FoodItem :foodItems="getRecipes?.data?.hits" />
+                <FoodItem :foodItems="filterItems(getRecipes?.data?.hits)" />
               </div>
             </div>
           </div>
-          <FavoriteRecipe />
+          <FavoriteRecipe :query="searchFoodRecipe" />
         </div>
       </main>
     </div>
   </FullPageLayout>
 </template>
 <script setup>
+import { usePageFilter } from '@/composables/usePageFilter';
+const { searchFoodRecipe, searchRecipe, filterItems } = usePageFilter();
 import { ref, onMounted, computed, watch } from "vue";
 import FoodByCountry from "./FoodByCountry.vue";
 
 import { useStore } from "vuex";
 const store = useStore();
 const country = ref("Indian");
-const searchFoodRecipe = ref();
+
 const getFood = (value) => {
   country.value = value;
 };
@@ -40,9 +43,7 @@ const getRecipe = (category) => {
 const getRecipes = computed(() => {
   return store.getters["FoodRecipeModule/getRecipe"];
 });
-const searchRecipe = (value) => {
-  searchFoodRecipe.value = value;
-};
+
 onMounted(() => {
   getRecipes;
   getRecipe(country.value);
@@ -52,7 +53,5 @@ watch(country, (newVal) => {
   getRecipes;
   getRecipe(newVal);
 });
-watch(searchFoodRecipe, (newVal) => {
-  getRecipe(newVal);
-});
+
 </script>

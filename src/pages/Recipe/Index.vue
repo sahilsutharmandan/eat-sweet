@@ -1,5 +1,6 @@
 <template>
-  <FullPageLayout @search-recipe="searchRecipe" :searchPanelVisible="true">
+  <FullPageLayout @search-recipe="searchRecipe">
+    <p v-if="searchFoodRecipe" role="status" class="text-sm text-gray-500 mb-4">Filtering ingredients and nutrients. Clear search to show all.</p>
     <div
       class="md:flex gap-4 spacy-y-4 lg:space-y-0"
       v-for="(item, index) in getRecipes?.data?.hits.slice(10, 11)"
@@ -38,7 +39,7 @@
             Ingredient
           </p>
           <p class="grid grid-cols-3 gap-3">
-            <Ingredient :ingredients="item.recipe.ingredients" />
+            <Ingredient :ingredients="filterItems(item.recipe.ingredients)" />
           </p>
         </div>
       </div>
@@ -47,7 +48,7 @@
         <ul class="pl-4 list-disc">
           <li
             class="flex gap-1 justify-between"
-            v-for="item in item.recipe.totalNutrients"
+            v-for="item in filterItems(Object.values(item.recipe.totalNutrients || {}))"
             :key="item"
           >
             <span>{{ item.label }}</span>
@@ -62,11 +63,13 @@
   </FullPageLayout>
 </template>
 <script setup>
+import { usePageFilter } from '@/composables/usePageFilter';
+const { searchFoodRecipe, searchRecipe, filterItems } = usePageFilter();
 import { ref, onMounted, computed, watch } from "vue";
 import { useStore } from "vuex";
 import Ingredient from "./Ingredient.vue";
 const store = useStore();
-const searchFoodRecipe = ref();
+
 const FoodCategories = ref("Vegetarian");
 const getRecipe = (category) => {
   store.dispatch("FoodRecipeModule/getRecipe", category);
@@ -74,13 +77,9 @@ const getRecipe = (category) => {
 const getRecipes = computed(() => {
   return store.getters["FoodRecipeModule/getRecipe"];
 });
-const searchRecipe = (value) => {
-  searchFoodRecipe.value = value;
-};
+
 onMounted(() => {
   getRecipe(FoodCategories.value);
 });
-watch(searchFoodRecipe, (newVal) => {
-  getRecipe(newVal);
-});
+
 </script>

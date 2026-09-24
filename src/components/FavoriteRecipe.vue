@@ -8,7 +8,8 @@
       </div>
     </nav>
     <div v-if="favoriteRecipe.length > 0" class="space-y-1">
-      <div v-for="item in favoriteRecipe.slice(0, 7)" :key="item">
+      <p v-if="query && !favoriteRecipe.some(item => matchesSearch(item, query))" class="text-sm text-gray-500">No matching favorites</p>
+      <div v-for="item in filteredFavorites.slice(0, 7)" :key="item">
         <div class="flex gap-2 items-center">
           <img class="w-12 rounded-xl" v-lazy="item.image" alt="" />
           <p class="line-clamp-2">{{ item.label }}</p>
@@ -34,10 +35,13 @@
   </div>
 </template>
 <script setup>
+import { matchesSearch } from '@/composables/usePageFilter';
+const props = defineProps({ query: { type: String, default: '' } });
 import { ref, watch, computed } from "vue";
 import { useStore } from "vuex";
 const store = useStore();
 const favoriteRecipe = computed(() => {
   return store.getters["FoodRecipeModule/favoriteRecipe"];
 });
+const filteredFavorites = computed(() => favoriteRecipe.value.filter(item => matchesSearch(item, props.query)));
 </script>

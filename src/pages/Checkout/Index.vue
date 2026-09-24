@@ -1,7 +1,7 @@
 <template>
-  <FullPageLayout class="flex flex-col">
+  <FullPageLayout @search-recipe="searchRecipe" class="flex flex-col">
     <div class="checkout-toolbar">
-      <MultiselectDropdown v-model="selection" class="recipe-selector" />
+      <MultiselectDropdown v-model="selection" :query="searchFoodRecipe" class="recipe-selector" />
       <button v-if="recipe" class="clear-selection" @click="selection = null">Clear selection</button>
     </div>
 
@@ -37,8 +37,9 @@
         <section class="ingredient-section" aria-labelledby="ingredients-title">
           <div class="section-heading"><h2 id="ingredients-title">What goes in</h2><span>{{ ingredients.length }} ingredients</span></div>
           <p class="section-caption">Quantities for the full recipe{{ servings ? ` · ${servings} servings` : '' }}</p>
+          <p v-if="searchFoodRecipe" role="status" class="section-caption">{{ filterItems(ingredients).length }} matching ingredients</p>
           <ul v-if="ingredients.length" class="ingredient-list">
-            <li v-for="(ingredient, index) in ingredients" :key="index"><span class="ingredient-dot" aria-hidden="true"></span>{{ ingredient }}</li>
+            <li v-for="(ingredient, index) in filterItems(ingredients)" :key="index"><span class="ingredient-dot" aria-hidden="true"></span>{{ ingredient }}</li>
           </ul>
           <p v-else class="section-caption">Ingredient information isn't available for this recipe.</p>
         </section>
@@ -59,6 +60,8 @@
   </FullPageLayout>
 </template>
 <script setup>
+import { usePageFilter } from '@/composables/usePageFilter';
+const { searchFoodRecipe, searchRecipe, filterItems } = usePageFilter();
 import { computed, ref, watch } from 'vue';
 import FullPageLayout from '../../components/FullPageLayout.vue';
 import MultiselectDropdown from '../../components/MultiselectDropdown.vue';

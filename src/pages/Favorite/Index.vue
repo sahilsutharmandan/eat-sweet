@@ -1,5 +1,5 @@
 <template>
-  <FullPageLayout>
+  <FullPageLayout @search-recipe="searchRecipe">
     <div v-if="favoriteRecipe.length > 0">
       <nav class="flex justify-between mb-4">
         <div class="flex items-center gap-2">
@@ -7,8 +7,9 @@
           <i class="fi fi-rr-settings-sliders mt-1.5"></i>
         </div>
       </nav>
+      <p v-if="searchFoodRecipe" role="status" class="text-sm text-gray-500 mb-4">{{ filterItems(favoriteRecipe).length }} matching favorites</p>
       <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-4">
-        <favoriteItem :foodItems="favoriteRecipe" />
+        <favoriteItem :foodItems="filterItems(favoriteRecipe)" />
       </div>
     </div>
     <div v-else class="m-auto text-center flex-1 space-y-3">
@@ -25,6 +26,8 @@
   </FullPageLayout>
 </template>
 <script setup>
+import { usePageFilter } from '@/composables/usePageFilter';
+const { searchFoodRecipe, searchRecipe, filterItems } = usePageFilter();
 import { ref, onMounted, computed, watch } from "vue";
 import { useStore } from "vuex";
 import FavoriteItem from "./FavoriteItem.vue";

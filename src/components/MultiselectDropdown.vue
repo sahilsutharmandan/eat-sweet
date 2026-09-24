@@ -1,8 +1,9 @@
 <template>
   <div>
+    <p v-if="query" role="status" class="text-sm text-gray-500 mb-2">{{ filteredRecipes.length }} matching recipes</p>
     <ThemedDropdown
       v-model="value"
-      :options="getRecipes?.data?.hits"
+      :options="filteredRecipes"
       optionLabel="recipe.label"
       dataKey="recipe.uri"
       placeholder="Select a Recipe"
@@ -38,12 +39,14 @@
   </div>
 </template>
 <script setup>
+import { matchesSearch } from '@/composables/usePageFilter';
 import { ref, computed, onMounted } from "vue";
 import ThemedDropdown from "./ThemedDropdown.vue";
 import { useStore } from "vuex";
 
 const store = useStore();
-const props = defineProps({ modelValue: { type: Object, default: null } });
+const props = defineProps({ query: { type: String, default: '' }, modelValue: { type: Object, default: null } });
+const filteredRecipes = computed(() => (getRecipes.value?.data?.hits || []).filter(item => matchesSearch(item.recipe, props.query)));
 const emit = defineEmits(["update:modelValue"]);
 const value = computed({
   get: () => props.modelValue,

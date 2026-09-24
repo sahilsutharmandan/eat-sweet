@@ -1,5 +1,6 @@
 <template>
-  <FullPageLayout>
+  <FullPageLayout @search-recipe="searchRecipe">
+    <p v-if="searchFoodRecipe" role="status" class="text-sm text-gray-500 mb-4">{{ filterItems(meals).length }} matching products · {{ filterItems(mealsByCategory).length }} matching meal options</p>
     <div class="mb-4">
       <div class="md:flex space-y-4 md:space-y-0 gap-4 items-center lg:w-1/3">
         <Dropdown
@@ -36,7 +37,7 @@
         </Dropdown>
         <Dropdown
           v-model="selectedMeal"
-          :options="mealsByCategory"
+          :options="filterItems(mealsByCategory)"
           optionLabel="strMeal"
           aria-label="Select a Meal"
           placeholder="Select a Meal"
@@ -67,7 +68,7 @@
         </Dropdown>
       </div>
     </div>
-    <div class="md:flex gap-4" v-for="(item, index) in meals" :key="index">
+    <div class="md:flex gap-4" v-for="(item, index) in filterItems(meals)" :key="index">
       <div class="md:w-3/4 lg:flex gap-6">
         <div class="lg:w-1/3">
           <img :src="item.strMealThumb" alt="" />
@@ -112,6 +113,8 @@
   </FullPageLayout>
 </template>
 <script setup>
+import { usePageFilter } from '@/composables/usePageFilter';
+const { searchFoodRecipe, searchRecipe, filterItems } = usePageFilter();
 import { ref, onMounted, computed, watch } from "vue";
 import { useStore } from "vuex";
 import Dropdown from "../../components/ThemedDropdown.vue";
@@ -148,7 +151,7 @@ onMounted(() => {
   getMealsType();
 });
 watch(selectedMeal, (newValue) => {
-  getMealsById(newValue.idMeal);
+  if (newValue?.idMeal) getMealsById(newValue.idMeal);
 });
 watch(selectedMealType, (newValue) => {
   getMealsByCategory(newValue.strCategory);

@@ -1,7 +1,8 @@
 <template>
   <div  v-for="(item, index) in ingredients" :key="index">
     <img
-      v-lazy="item.image"
+      v-if="item.image"
+      :src="item.image" loading="lazy"
       class="w-20 aspect-square rounded-full object-center m-auto z-[1]"
       alt=""
     />
