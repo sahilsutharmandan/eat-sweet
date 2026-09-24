@@ -55,11 +55,7 @@
                 class="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-4"
               >
                 <div class="flex h-16 shrink-0 items-center">
-                  <h1 class="italic antialiased tracking-wide text-xl">
-                    <span class="text-gray-800 font-bold">eat</span>
-                    <span class="text-green-800 font-bold">sweet</span>
-                    <i class="fi fi-rr-leaf text-xs ml-0.5 text-green-800"></i>
-                  </h1>
+                  <EatSweetLogo size="md" />
                 </div>
                 <nav class="flex flex-1 flex-col">
                   <ul role="list" class="flex flex-1 flex-col gap-y-7">
@@ -191,6 +187,7 @@
 <script setup>
 import { ref } from "vue";
 import { useRoute } from "vue-router";
+import EatSweetLogo from "./EatSweetLogo.vue";
 
 const route = useRoute();
 import {

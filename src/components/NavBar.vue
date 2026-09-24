@@ -1,10 +1,8 @@
 <template>
   <div class="p-6 w-32 shrink-0 bg-green-50 hidden md:flex items-center flex-col">
-    <h1 class="italic antialiased tracking-wide mb-8">
-      <span class="text-gray-800 font-bold">eat</span>
-      <span class="text-green-800 font-bold">sweet</span>
-      <i class="fi fi-rr-leaf text-xs ml-0.5 text-green-800"></i>
-    </h1>
+    <div class="mb-8 flex justify-center w-full">
+      <EatSweetLogo :isVertical="true" size="md" />
+    </div>
     <ul class="m-2" v-for="(item, index) in navigation" :key="index">
       <router-link :to="item.url">
         <li
@@ -27,6 +25,7 @@
 </template>
 <script setup>
 import { ref } from "vue";
+import EatSweetLogo from "./EatSweetLogo.vue";
 const navigation = ref([
   {
     name: "Dashboard",

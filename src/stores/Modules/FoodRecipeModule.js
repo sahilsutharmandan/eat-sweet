@@ -2,11 +2,16 @@ import axios from "axios";
 export default {
     namespaced: true,
     state() {
+        let savedFavorites = [];
+        try {
+            const raw = localStorage.getItem('eatsweet_favorites');
+            if (raw) savedFavorites = JSON.parse(raw);
+        } catch (e) {}
         return {
             recipe: [],
-            favoriteRecipe: [],
+            favoriteRecipe: savedFavorites,
             recipeDetails: [],
-            loading: true
+            loading: false
         }
     },
     mutations: {
@@ -20,6 +25,9 @@ export default {
             } else {
                 state.favoriteRecipe = state.favoriteRecipe.filter(item => item.label !== recipe.label);
             }
+            try {
+                localStorage.setItem('eatsweet_favorites', JSON.stringify(state.favoriteRecipe));
+            } catch (e) {}
         },
         GET_RECIPE_DETAILS(state, recipe) {
             state.recipeDetails = recipe
